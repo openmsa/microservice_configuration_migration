@@ -1,0 +1,160 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <serviceTaskType/>
+    <order>0</order>
+    <visibility>5</visibility>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects/>
+    <name>bgp_vrf_neighbor_status</name>
+    <group>EMULATION|CISCO|IOS</group>
+    <importonce>false</importonce>
+    <importrank>22</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_state" name="params.bgp_state" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_nghr_prefix_cur" name="params.bgp_vrf_nghr_prefix_cur" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_nghr_prefix_total" name="params.bgp_vrf_nghr_prefix_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>
+    #show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor}
+    #show ip bgp vpnv4 vrf INTRAGOV-SAPTELE neighbors 187.92.16.30
+    c-br-sp-spo-pd-rav-01#show ip bgp vpnv4 vrf FAZENDA neighbors 201.61.120.134
+BGP neighbor is 201.61.120.134, vrf FAZENDA, remote AS 65001, external link
+BGP version 4, remote router ID 201.60.220.235
+BGP state = Established, up for 3w0d
+Last read 00:00:05, last write 00:00:25, hold time is 180, keepalive interval is 60 seconds
+Neighbor sessions:
+1 active, is not multisession capable (disabled)
+Neighbor capabilities:
+Route refresh: advertised and received(new)
+Four-octets ASN Capability: advertised and received
+Address family IPv4 Unicast: advertised and received
+Graceful Restart Capability: advertised
+Enhanced Refresh Capability: advertised and received
+Multisession Capability:
+Stateful switchover support enabled: NO for session 1
+Message statistics:
+InQ depth is 0
+OutQ depth is 0
+
+Sent Rcvd
+Opens: 1 1
+Notifications: 0 0
+Updates: 9751 4396
+Keepalives: 30880 31550
+Route Refresh: 0 0
+Total: 40634 35947
+Default minimum time between advertisement runs is 0 seconds
+
+    
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[{if isset($params.object_id) && isset($params.neighbor)}/config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor}" {/if}]]></operation>
+    <post_template></post_template>
+    <parser>
+      <section>
+        <regexp>@\s*show ip bgp vpnv4 vrf (?&lt;object_id&gt;\S+) neighbors@</regexp>
+      </section>
+      <lines>
+        <line>
+          <array/>
+          <regexp>@\s*BGP neighbor is\s+(?&lt;neighbor&gt;\S+), @</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@\s+BGP state =(?&lt;bgp_state&gt;.*)@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@\s*Prefixes Total:\s+(?&lt;bgp_vrf_nghr_prefix_total&gt;\S+)@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@\s*Prefixes Current:\s+(?&lt;bgp_vrf_nghr_prefix_cur&gt;\S+)@</regexp>
+          <xpath/>
+        </line>
+        <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@^\s*!@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@^$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@BGP version@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Neighbor sessions@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@is not multisession@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Stateful switchove@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Do log neighbor@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Default minimum@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@For address@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Translates@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@BGP table@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Output@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Index @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Overrides@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Slow-peer@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Sent\s+Rcvd@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Prefix activity@</regexp>
+        </ignore>
+      </lines>
+    </parser>
+  </command>
+  <command name="CREATE"/>
+  <command name="READ"/>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE"/>
+  <command name="LIST"/>
+</ObjectDefinition>
