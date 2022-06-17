@@ -31,20 +31,28 @@
   </variables>
   <example>
     <content>!
- show ip arp summary
-    7 IP ARP entries, with 0 of them incomplete
+ i-br-sp-spo-si-rai-01#show ip arp | include GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.193 - 68ef.bd11.3201 ARPA GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.194 4 943f.c25c.cbc4 ARPA GigabitEthernet0/0/1.1561116
+ 
 !</content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)}/config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip arp summary" {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id)} /config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip arp |include {$params.object_id}"  {/if}]]></operation>
     <post_template>{assign_object_variable 
 	var=&quot;object_id&quot;
 	value=&quot;{$params.total}-{$params.incomplete}&quot;}</post_template>
     <parser>
       <section>
-        <regexp>@^\s*(?&lt;total&gt;\d+) IP ARP entries, with (?&lt;incomplete&gt;\d+) of them incomplete@</regexp>
+        <regexp>@\s*show ip arp\s*|\s*include (?&lt;object_id&gt;\W+)@</regexp>
       </section>
-      <lines/>
+      <lines>
+        <line>
+          <array/>
+          <regexp>@^\s*connected\s+\d+\s+(?&lt;vrf_route_summary_connected&gt;\d+)@</regexp>
+          <xpath/>
+        </line>
+      </lines> 
     </parser>
   </command>
   <command name="CREATE"/>
