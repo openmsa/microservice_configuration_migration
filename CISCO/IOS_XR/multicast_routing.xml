@@ -55,6 +55,9 @@ multicast-routing
 {if isset($vrf.vrf_mdt_mtu)}
   mdt mtu {$vrf.vrf_mdt_mtu}
 {/if}
+  rate-per-route
+  interface all enable
+  accounting per-prefix
 !
 root
 {/if}
@@ -75,6 +78,9 @@ multicast-routing
   {if isset($af.vrf_mdt_mtu)}
    mdt mtu {$af.vrf_mdt_mtu}
   {/if}
+  rate-per-route
+  interface all enable
+  accounting per-prefix
  !
 root
   {/if}
