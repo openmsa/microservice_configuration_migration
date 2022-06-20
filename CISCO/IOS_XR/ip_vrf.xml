@@ -262,6 +262,9 @@ vrf {$params.object_id}
 {if isset($address_family.export_route_map)}
   export route-policy {$address_family.export_route_map}
 {/if}
+{if isset($address_family.vrf_max_routes)}
+  maximum prefix {$address_family.vrf_max_routes}
+{/if}
  {if isset($address_family.import_array_rt)} 
  {foreach $address_family.import_array_rt as $import_array_rt}
  {if $import_array_rt@first}
