@@ -157,8 +157,8 @@ Sent: 1523453 (retransmit: 1304 fastretransmit: 0),with data: 773766, total data
 *}
 </post_template>>
     <parser>
-      <section>
-        <regexp>@\s*show\s+ip\s+bgp\s+neighbors\s+(?&lt;object_id&gt;\S+@</regexp>
+      <section>     
+        <regexp>@\s*show\s+ip\s+bgp\s+neighbors\s+(?&lt;object_id&gt;\S+)@</regexp>
       </section>
       <lines>
         <line>

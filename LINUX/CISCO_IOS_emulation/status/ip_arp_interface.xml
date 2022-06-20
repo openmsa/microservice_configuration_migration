@@ -14,7 +14,7 @@
     <importIfMandatoryPresent>false</importIfMandatoryPresent>
     <maxInstances>0</maxInstances>
     <relatedObjects/>
-    <name>arp_summary</name>
+    <name>ip_arp_interface</name>
     <group>EMULATION|CISCO|IOS</group>
     <importonce>false</importonce>
     <importrank>22</importrank>
@@ -26,8 +26,8 @@
   </information>
   <variables frozen="0">
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="total" name="params.total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="incomplete" name="params.incomplete" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="interface_name" name="params.interface_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrf_detail" name="params.detail.0.vrf_detail" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>!
@@ -38,18 +38,19 @@
 !</content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)} /config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip arp |include {$params.object_id}"  {/if}]]></operation>
-    <post_template>{assign_object_variable 
-	var=&quot;object_id&quot;
-	value=&quot;{$params.total}-{$params.incomplete}&quot;}</post_template>
+    <operation><![CDATA[{if isset($params.object_id)} /config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip arp | include {$params.object_id}"  {/if}]]></operation>
+    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;{$params.object_id}&quot;}</post_template>
     <parser>
       <section>
-        <regexp>@\s*show ip arp\s*|\s*include (?&lt;object_id&gt;\W+)@</regexp>
+        <regexp>@\s*show ip arp\s*|\s*include (?&lt;object_id&gt;.*)@</regexp>
       </section>
       <lines>
         <line>
-          <array/>
-          <regexp>@^\s*connected\s+\d+\s+(?&lt;vrf_route_summary_connected&gt;\d+)@</regexp>
+          <array name="detail">
+            <lines>
+            </lines>
+            <regexp>@^\s*Internet\s+(?&lt;vrf_detail&gt;.*)@</regexp>
+          </array>         
           <xpath/>
         </line>
       </lines> 
@@ -57,23 +58,12 @@
   </command>
   <command name="CREATE"/>
   <command name="READ">
-    <output><![CDATA[#
-## IP arp summary  ##
-{foreach $arp_summary as $arp}
-total: {$arp.total}
-incomplete: {$arp.incomplete}
-{/foreach}
-]]></output>
+    <output></output>
   </command>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>
   <command name="LIST">
-    <output><![CDATA[#
-## IP arp summary  ##
-#
-total: {$arp_summary.$object_id.total}
-incomplete: {$arp_summary.$object_id.incomplete}
-]]></output>
+    <output></output>
   </command>
 </ObjectDefinition>
