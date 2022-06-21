@@ -184,12 +184,12 @@
               </line>
               <line>
                 <array/>
-                <regexp>@\s*police (((rate)?\s*(?&lt;police_rate&gt;\d+)(\s?(?&lt;police_rate_unit&gt;bps)?))?|(rate percent\s*(?&lt;police_rate_percent&gt;\d+))?|(cir percent\s*(?&lt;police_cir_percent&gt;\d+))?)\s*(conform-action (?&lt;conform_action&gt;((?!(\s*exceed-action\s*)).)*))?\s*(exceed-action (?&lt;exceed_action&gt;((?!(\s*violate-action\s*)).)*))?\s*(violate-action (?&lt;violate_action&gt;.*))?@</regexp>
+                <regexp>@\s*police\s*(cir\s*(?&lt;police_cir_burst&gt;\d+))?\s*((bc)?\s*(?&lt;police_bc_burst&gt;\d+))?\s*((be)? (?&lt;police_be_burst&gt;\d+))?\s*(conform-action (?&lt;conform_action&gt;((?!exceed-action).)*))?\s*(exceed-action\s*(?&lt;exceed_action&gt;((?!violate-action).)*))?\s*(violate-action\s*(?&lt;violate_action&gt;.*))?@</regexp>
                 <xpath/>
               </line>
               <line>
                 <array/>
-                <regexp>@\s*police\s*((cir)?\s*(?&lt;police_cir_burst&gt;\d+))?\s*((bc)?\s*(?&lt;police_bc_burst&gt;\d+))?\s*((be)? (?&lt;police_be_burst&gt;\d+))?\s*(conform-action (?&lt;conform_action&gt;((?!exceed-action).)*))?\s*(exceed-action\s*(?&lt;exceed_action&gt;((?!violate-action).)*))?\s*(violate-action\s*(?&lt;violate_action&gt;.*))?
+                <regexp>@\s*police (((rate)?\s*(?&lt;police_rate&gt;\d+)(\s?(?&lt;police_rate_unit&gt;bps)?))?|(rate percent\s*(?&lt;police_rate_percent&gt;\d+))?|(cir percent\s*(?&lt;police_cir_percent&gt;\d+))?)\s*(conform-action (?&lt;conform_action&gt;((?!(\s*exceed-action\s*)).)*))?\s*(exceed-action (?&lt;exceed_action&gt;((?!(\s*violate-action\s*)).)*))?\s*(violate-action (?&lt;violate_action&gt;.*))?
 @</regexp>
                 <xpath/>
               </line>
