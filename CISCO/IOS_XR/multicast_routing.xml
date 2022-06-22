@@ -54,6 +54,8 @@ multicast-routing
 {/if}
 {if isset($vrf.vrf_mdt_mtu)}
   mdt mtu {$vrf.vrf_mdt_mtu}
+{else}
+  mdt mtu 1524
 {/if}
   rate-per-route
   interface all enable
@@ -77,6 +79,8 @@ multicast-routing
   {/if}
   {if isset($af.vrf_mdt_mtu)}
    mdt mtu {$af.vrf_mdt_mtu}
+  {else}
+   mdt mtu 1524
   {/if}
   rate-per-route
   interface all enable
