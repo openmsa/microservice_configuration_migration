@@ -28,8 +28,8 @@
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="5" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_state" name="params.bgp_state" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="bgp_vrf_nghr_prefix_cur" name="params.bgp_vrf_nghr_prefix_cur" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="bgp_vrf_nghr_prefix_total" name="params.bgp_vrf_nghr_prefix_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_nghr_prefix_cur" name="params.bgp_nghr_prefix_cur" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_nghr_prefix_total" name="params.bgp_nghr_prefix_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>
@@ -150,11 +150,10 @@ Sent: 1523453 (retransmit: 1304 fastretransmit: 0),with data: 773766, total data
   </example>
   <command name="IMPORT">
     <operation><![CDATA[{if isset($params.neighbor)}/config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show ip bgp neighbors {$params.neighbor}" {/if}]]></operation>
-   <post_template>{*
-{if isset($object_id)}
+   <post_template>
+{if isset($params.object_id)}
   {assign_object_variable var=&quot;neighbor&quot; value=$params.object_id}
 {/if}
-*}
 </post_template>>
     <parser>
       <section>     
@@ -173,12 +172,12 @@ Sent: 1523453 (retransmit: 1304 fastretransmit: 0),with data: 773766, total data
         </line>
         <line>
           <array/>
-          <regexp>@\s*Prefixes Total:\s+(?&lt;bgp_vrf_nghr_prefix_total&gt;\S+)@</regexp>
+          <regexp>@\s*Prefixes Total:\s+(?&lt;bgp_nghr_prefix_total&gt;\S+)@</regexp>
           <xpath/>
         </line>
         <line>
           <array/>
-          <regexp>@\s*Prefixes Current:\s+(?&lt;bgp_vrf_nghr_prefix_cur&gt;\S+)@</regexp>
+          <regexp>@\s*Prefixes Current:\s+(?&lt;bgp_nghr_prefix_cur&gt;\S+)@</regexp>
           <xpath/>
         </line>
         <ignore>

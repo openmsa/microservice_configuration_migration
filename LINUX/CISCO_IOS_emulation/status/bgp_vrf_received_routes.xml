@@ -27,7 +27,7 @@
   <variables frozen="0">
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="bgp_vrf_received_routes" name="params.bgp_vrf_received_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_received_routes" name="params.network.0.bgp_vrf_received_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_vrf_received_routes_total" name="params.bgp_vrf_received_routes_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
@@ -58,36 +58,38 @@ Total number of prefixes 4
       <lines>
         <line>
           <array/>
-          <regexp>@^\s*.*(?&lt;bgp_vrf_received_routes&gt;\S*)@</regexp>
-          <xpath/>
-        </line>
-        <line>
-          <array/>
-          <regexp>@^\s*.*(?&lt;bgp_vrf_received_routes&gt;\S*)@</regexp>
-          <xpath/>
-        </line>
-        <line>
-          <array/>
           <regexp>@^\s*Total number of prefixes\s+(?&lt;bgp_vrf_received_routes_total&gt;\d+)@</regexp>
           <xpath/>
         </line>
+        <line>
+          <array name="network">
+            <lines>
+            </lines>
+            <regexp>@\s*\*\s+(?&lt;bgp_vrf_received_routes&gt;.*)@</regexp>
+            <regexp>@\s*\*\>\s+(?&lt;bgp_vrf_received_routes&gt;.*)@</regexp>
+          </array>         
+          <xpath/>
+        </line>
         <ignore>
-          <regexp>BGP table version</regexp>
+          <regexp>@BGP table version@</regexp>
         </ignore>
         <ignore>
-          <regexp>codes:</regexp>
+          <regexp>@codes:@</regexp>
         </ignore>
         <ignore>
-          <regexp>^\s*$</regexp>
+          <regexp>@^\s*$@</regexp>
         </ignore>
         <ignore>
-          <regexp>Network</regexp>
+          <regexp>@Network@</regexp>
         </ignore>
         <ignore>
-          <regexp>RIB-failure</regexp>
+          <regexp>@RIB-failure@</regexp>
         </ignore>
         <ignore>
-          <regexp>Route Distinguisher</regexp>
+          <regexp>@best-external@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Route Distinguisher@</regexp>
         </ignore>
         <ignore>
           <regexp>@^\s+$@</regexp>
