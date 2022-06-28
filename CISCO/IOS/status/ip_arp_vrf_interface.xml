@@ -1,0 +1,81 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <serviceTaskType/>
+    <order>0</order>
+    <visibility>5</visibility>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects/>
+    <name>ip_arp_vrf_interface</name>
+    <group>CISCO|IOS</group>
+    <importonce>false</importonce>
+    <importrank>22</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="interface_name" name="params.interface_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrf_name" name="params.vrf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrf_detail" name="params.detail.0.vrf_detail" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>!
+ i-br-sp-spo-si-rai-01#c-br-sp-spo-mb-rav-04#show ip arp vrf   V11011:SSII_SORIN | include GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.193 - 68ef.bd11.3201 ARPA GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.194 4 943f.c25c.cbc4 ARPA GigabitEthernet0/0/1.1561116
+ 
+!</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[{if isset($params.object_id) and isset($params.vrf_name) } show ip arp vrf {$params.vrf_name} | include {$params.object_id} {/if}]]></operation>
+    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;{$params.object_id}&quot;}</post_template>
+    <parser>
+      <section>
+        <regexp>@\s*show\s+ip\s+arp\s+vrf\s+(?&lt;vrf_name&gt;\S+)\s*|\s*include\s+(?&lt;object_id&gt;.*)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <array name="detail">
+            <lines>
+            </lines>
+            <regexp>@^\s*Internet\s+(?&lt;vrf_detail&gt;.*)@</regexp>
+          </array>         
+          <xpath/>
+        </line>
+      </lines> 
+    </parser>
+  </command>
+  <command name="CREATE"/>
+  <command name="READ">
+    <output><![CDATA[#
+## IP arp summary  ##
+{foreach $arp_summary as $arp}
+total: {$arp.total}
+incomplete: {$arp.incomplete}
+{/foreach}
+]]></output>
+  </command>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE"/>
+  <command name="LIST">
+    <output><![CDATA[#
+## IP arp summary  ##
+#
+total: {$arp_summary.$object_id.total}
+incomplete: {$arp_summary.$object_id.incomplete}
+]]></output>
+  </command>
+</ObjectDefinition>

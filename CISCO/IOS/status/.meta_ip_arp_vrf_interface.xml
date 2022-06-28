@@ -3,11 +3,7 @@
     <map>
         <entry>
             <key>DISPLAYNAME</key>
-            <value>route_summary.xml</value>
-        </entry>
-        <entry>
-            <key>DATE_MODIFICATION</key>
-            <value>1652170533387</value>
+            <value>ip_arp_vrf_interface.xml</value>
         </entry>
         <entry>
             <key>REPOSITORY</key>
@@ -15,11 +11,11 @@
         </entry>
         <entry>
             <key>DATE_CREATION</key>
-            <value>1652170533379</value>
+            <value>1655369521914</value>
         </entry>
         <entry>
             <key>MODEL</key>
-            <value>28112021</value>
+            <value>113</value>
         </entry>
         <entry>
             <key>TAG</key>
@@ -30,7 +26,7 @@
         </entry>
         <entry>
             <key>MANUFACTURER</key>
-            <value>14020601</value>
+            <value>1</value>
         </entry>
         <entry>
             <key>TYPE</key>

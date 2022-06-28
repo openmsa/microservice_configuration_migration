@@ -48,7 +48,10 @@
      </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)} /config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show ip route summary" {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id)} /config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show route summary" {/if}]]></operation>
+    <post_template>{assign_object_variable 
+	var=&quot;object_id&quot;
+	value=&quot;{$params.ip_route_summary_connected}-{$params.ip_route_summary_static}-{$params.ip_route_summary_isis}-{$params.ip_route_summary_bgp}-{$params.ip_route_summary_total}&quot;}</post_template>
     <parser>
       <section>
         <regexp>@^\s*Route\s+Source@</regexp>
