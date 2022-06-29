@@ -1,0 +1,134 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <serviceTaskType/>
+    <order>0</order>
+    <visibility>5</visibility>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects/>
+    <name>bgp_advertised_routes</name>
+    <group>EMULATION|CISCO|IOS-XR</group>
+    <importonce>false</importonce>
+    <importrank>22</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_advertised_routes" name="params.network.0.bgp_advertised_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_advertised_routes_total" name="params.bgp_advertised_routes_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content> 
+i-br-sp-spo-si-rai-01#show bgp neighbors 189.20.5.158 advertised-routes
+BGP table version is 1867295383, local router ID is 187.100.3.84
+Status codes: s suppressed, d damped, h history, * valid, > best, i - internal,
+r RIB-failure, S Stale, m multipath, b backup-path, f RT-Filter,
+x best-external, a additional-path, c RIB-compressed,
+Origin codes: i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+Originating default network 0.0.0.0
+
+Network Next Hop Metric LocPrf Weight Path
+* 201.91.44.192/30 189.20.5.158 0 600 0 64828 ?
+*> 201.91.178.102/32
+189.20.5.158 0 600 0 64828 ?
+* 201.91.44.192/30 189.20.5.158 0 600 0 64828 ?
+*> 201.91.178.102/32
+189.20.5.158 0 600 0 64828 ?
+
+Total number of prefixes 2
+
+ </content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[{if isset($params.neighbor)}/config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show bgp neighbors {$params.neighbor} advertised-routes" {/if}]]></operation>
+    <post_template>
+{if isset($params.object_id)}
+  {assign_object_variable var=&quot;neighbor&quot; value=$params.object_id}
+{/if}
+</post_template>
+    <parser>
+      <section>
+        <regexp>@\s*show\s+bgp\s+neighbors\s+(?&lt;object_id&gt;\S*)\s+advertised-routes$@</regexp>
+      </section>
+      <lines>
+        <line>
+          <array/>
+          <regexp>@^\s*Total number of prefixes\s+(?&lt;bgp_advertised_routes_total&gt;\d+)@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array name="network">
+            <lines>
+            </lines>
+            <regexp>@\s*\*\s+(?&lt;bgp_advertised_routes&gt;.*)@</regexp>
+            <regexp>@\s*\*\>\s+(?&lt;bgp_advertised_routes&gt;.*)@</regexp>
+          </array>         
+          <xpath/>
+        </line>
+        <ignore>
+          <regexp>@BGP table version@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@codes:@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Originating@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Network@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@RIB-failure@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@best-external@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Route Distinguisher@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@^\s+$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Level@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@External@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Internal@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@internal@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Route@</regexp>
+        </ignore>
+      </lines>
+    </parser>
+  </command>
+  <command name="CREATE"/>
+  <command name="READ"/>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE"/>
+  <command name="LIST"/>
+</ObjectDefinition>

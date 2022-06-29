@@ -15,7 +15,7 @@
     <maxInstances>0</maxInstances>
     <relatedObjects/>
     <name>bgp_vrf_neighbor_status</name>
-    <group>CISCO|IOS|STATUS</group>
+    <group>CISCO|IOS-XR</group>
     <importonce>false</importonce>
     <importrank>22</importrank>
     <reorderinstances>false</reorderinstances>
@@ -110,11 +110,11 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
     </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id) and isset($params.neighbor)}show bgp vrf {$params.object_id} neighbors {$params.neighbor}{/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id) and isset($params.neighbor)} show bgp vrf {$params.object_id} neighbors {$params.neighbor} {/if}]]></operation>
     <post_template></post_template>
     <parser>
       <section>
-        <regexp>@^\s*show bgp vrf (?&lt;object_id&gt;\S+) neighbors @</regexp>
+        <regexp>@\s*show bgp vrf (?&lt;object_id&gt;\S+) neighbors @</regexp>
       </section>
       <lines>
         <line>

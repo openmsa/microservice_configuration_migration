@@ -1,0 +1,69 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <serviceTaskType/>
+    <order>0</order>
+    <visibility>5</visibility>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects/>
+    <name>ip_arp_interface</name>
+    <group>CISCO|IOS</group>
+    <importonce>false</importonce>
+    <importrank>22</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="interface_name" name="params.interface_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrf_detail" name="params.detail.0.vrf_detail" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>!
+ i-br-sp-spo-si-rai-01#show ip arp | include GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.193 - 68ef.bd11.3201 ARPA GigabitEthernet0/0/1.1561116
+ Internet 201.91.44.194 4 943f.c25c.cbc4 ARPA GigabitEthernet0/0/1.1561116
+ 
+!</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[{if isset($params.object_id)} show ip arp | include {$params.object_id} {/if}]]></operation>
+    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;{$params.object_id}&quot;}</post_template>
+    <parser>
+      <section>
+        <regexp>@\s*show ip arp\s*|\s*include (?&lt;object_id&gt;.*)@</regexp>
+      </section>
+      <lines>
+        <line>
+          <array name="detail">
+            <lines>
+            </lines>
+            <regexp>@^\s*Internet\s+(?&lt;vrf_detail&gt;.*)@</regexp>
+          </array>         
+          <xpath/>
+        </line>
+      </lines> 
+    </parser>
+  </command>
+  <command name="CREATE"/>
+  <command name="READ">
+    <output></output>
+  </command>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE"/>
+  <command name="LIST">
+    <output></output>
+  </command>
+</ObjectDefinition>

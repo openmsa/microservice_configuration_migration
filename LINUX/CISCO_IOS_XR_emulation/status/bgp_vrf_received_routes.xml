@@ -27,7 +27,7 @@
   <variables frozen="0">
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="bgp_vrf_received_routes" name="params.bgp_vrf_received_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_received_routes" name="params.network.0.bgp_vrf_received_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_vrf_received_routes_total" name="params.bgp_vrf_received_routes_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
@@ -58,39 +58,49 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
  </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id) and isset($params.neighbor)}/config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor} routes" {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id) and isset($params.neighbor)}/config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show bgp vrf {$params.object_id} neighbors {$params.neighbor} routes" {/if}]]></operation>
     <parser>
       <section>
-        <regexp>@\s*show ip bgp vpnv4 vrf (?&lt;object_id&gt;\S*) neighbors (?&lt;neighbor&gt;\S*) routes@</regexp>
+        <regexp>@\s*show bgp vrf (?&lt;object_id&gt;\S*) neighbors (?&lt;neighbor&gt;\S*) routes@</regexp>
       </section>
       <lines>
-        <line>
-          <array/>
-          <regexp>@^\s*(?&lt;bgp_vrf_received_routes&gt;\s+([0-9]{1,3}\.){3}[0-9]{1,3}\/\d+)@</regexp>
-          <xpath/>
-        </line>
         <line>
           <array/>
           <regexp>@^\s*Processed (?&lt;bgp_vrf_received_routes_prefix&gt;\d+ prefixes), @</regexp>
           <xpath/>
         </line>
+        <line>
+          <array name="network">
+            <lines>
+            </lines>
+	    <regexp>@^\s*(?&lt;bgp_vrf_received_routes&gt;\s+([0-9]{1,3}\.){3}[0-9]{1,3}\/\d+)@</regexp>
+            <regexp>@\s*\*\s+(?&lt;bgp_vrf_received_routes&gt;.*)@</regexp>
+            <regexp>@\s*\*\>\s+(?&lt;bgp_vrf_received_routes&gt;.*)@</regexp>
+          </array>         
+          <xpath/>
+        </line>
+
+
         <ignore>
-          <regexp>BGP table version</regexp>
+          <regexp>@BGP table version@</regexp>
         </ignore>
         <ignore>
-          <regexp>codes:</regexp>
+          <regexp>@codes:@</regexp>
         </ignore>
         <ignore>
-          <regexp>^\s*$</regexp>
+          <regexp>@^\s*$@</regexp>
         </ignore>
         <ignore>
-          <regexp>Network</regexp>
+          <regexp>@Network@</regexp>
         </ignore>
         <ignore>
-          <regexp>RIB-failure</regexp>
+          <regexp>@RIB-failure@</regexp>
         </ignore>
         <ignore>
-          <regexp>Route Distinguisher</regexp>
+          <regexp>@best-external@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Route Distinguisher@</regexp>
         </ignore>
         <ignore>
           <regexp>@^\s+$@</regexp>

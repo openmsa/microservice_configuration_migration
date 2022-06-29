@@ -287,7 +287,8 @@ vrf {$params.object_id}
 {/foreach}
 {/if}
 !
-root]]></operation>
+root
+]]></operation>
   </command>
   <command name="READ"/>
   <command name="UPDATE"/>

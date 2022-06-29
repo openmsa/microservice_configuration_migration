@@ -319,6 +319,9 @@
         <ignore>
           <regexp>@exit-address-family@</regexp>
         </ignore>
+        <ignore>
+          <regexp>@vnet@</regexp>
+        </ignore>
       </lines>
     </parser>
   </command>

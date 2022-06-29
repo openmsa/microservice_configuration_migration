@@ -65,6 +65,9 @@
         <ignore>
           <regexp>@....@</regexp>
         </ignore>
+        <ignore>
+          <regexp>@!!!!!@</regexp>
+        </ignore>
       </lines>
     </parser>
   </command>
