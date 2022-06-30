@@ -301,6 +301,12 @@ interface {$params.object_id}
 {else if isset($params.ip_urpf)}
  ipv4 verify {$params.ip_urpf}
 {/if}
+{if isset($params.ip_flow) && isset($params.ipv6_address)}
+ flow ipv4 monitor MONITOR-IPV4 sampler SAMPLER-1-OUT-1000 {$params.ip_flow}
+ flow ipv6 monitor MONITOR-IPV6 sampler SAMPLER-1-OUT-1000 {$params.ip_flow}
+{else if isset($params.ip_flow)}
+ flow ipv4 monitor MONITOR-IPV4 sampler SAMPLER-1-OUT-1000 {$params.ip_flow}
+{/if}
 {if isset($params.bandwidth)}
  bandwidth {$params.bandwidth}
 {/if}
