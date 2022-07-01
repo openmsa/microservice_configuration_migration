@@ -241,6 +241,9 @@ end policy
 !
 route-policy {$params.object_id}
 {foreach $params.statements|@sortby_typed:"priority:int" as $statements}
+	STMT FIRST: {$statements@first}
+	STMT LAST: {$statements@last}
+	STMT TOTAL: {$statements@total}
   {$continue=false}
   {$continue_is_set=false}
   {* first iteration on blocks to look for potential "continue" *}
@@ -366,19 +369,18 @@ route-policy {$params.object_id}
     {/foreach}
   {else}  {* ELSE {if isset($statements.block)} *}
     {if $statements.action == "permit" && ($statements@total == 1 || !$statements@last)}
-      pass
-    {/if}
-    {if $statements.action == "permit" && ($statements@total >1 && $statements@last)}
-      pass
+      pass  TOTO1
+    {else if $statements.action == "permit" && ($statements@total >1 && $statements@last)}
+      pass TOTO2
     {/if}
   {/if} {* END {if isset($statements.block)} *}
   {if $statements@last}
   
 else 
-    {if $statements.action == "permit" && ($statements@total == 0 && $statements@last)}
-  pass
+    {if $statements.action == "permit" && ($statements@total == 1 && $statements@last)}
+  drop TOTO3
     {else}
-  drop
+  pass  TOTO4
     {/if}
 endif
   {/if} {* end {if $statements@last} *}
