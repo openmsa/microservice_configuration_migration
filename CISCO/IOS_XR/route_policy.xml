@@ -375,7 +375,7 @@ route-policy {$params.object_id}
   {if $statements@last}
   
 else 
-    {if $statements.action == "permit" && ($statements@total == 0 && $statements@last)}
+    {if $statements.action == "permit"}
   pass
     {else}
   drop
