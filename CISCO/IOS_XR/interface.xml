@@ -295,6 +295,12 @@ interface {$params.object_id}
 {if isset($params.mtu_int)}
  mtu {$params.mtu_int}
 {/if}
+{if isset($params.ip_urpf) && isset($params.ipv6_address)}
+ ipv4 verify {$params.ip_urpf}
+ ipv6 verify {$params.ip_urpf}
+{else if isset($params.ip_urpf)}
+ ipv4 verify {$params.ip_urpf}
+{/if}
 {if isset($params.bandwidth)}
  bandwidth {$params.bandwidth}
 {/if}
