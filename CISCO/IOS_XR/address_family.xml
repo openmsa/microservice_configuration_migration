@@ -275,7 +275,7 @@ root
   <command name="DELETE">
     <operation><![CDATA[{if isset($params.neighbors) && count($params.neighbors)>1}
 !
- router bgp {$bgp_vrf.$object_id.router_bgp}
+ router bgp {$params.router_bgp}
   address-family {$params.bgp_address_family} unicast
   {foreach $params.neighbors as $neighbor}
     no neighbor {$neighbor.bgp_neighbor} 
