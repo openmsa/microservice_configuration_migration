@@ -249,6 +249,11 @@
                 <regexp>@\s*mdt mtu (?&lt;vrf_mdt_mtu&gt;\d+)@</regexp>
                 <xpath/>
               </line>
+              <line>
+                <array/>
+                <regexp>@\s*mdt data (?&lt;vrf_mdt_data_ip&gt;\S+) (?&lt;vrf_mdt_data_imask&gt;\S+)@</regexp>
+                <xpath/>
+              </line>
             </lines>
             <lines/>
             <regexp>@\s*address-family\s+(?&lt;address_family&gt;ipv4|ipv6)$@</regexp>
@@ -308,6 +313,11 @@
         <line>
           <array/>
           <regexp>@\s*mdt mtu (?&lt;vrf_mdt_mtu&gt;\d+)@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@\s*mdt data (?&lt;vrf_mdt_data_ip&gt;\S+) (?&lt;vrf_mdt_data_imask&gt;\S+)@</regexp>
           <xpath/>
         </line>
         <ignore>

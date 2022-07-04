@@ -53,7 +53,15 @@
 ip access-list extended coppacl-gerencia-baixa-pri-icmp
  permit icmp any any echo
  permit icmp any any time-exceeded
-!</content>
+!
+ip access-list extended LIMITA_BANDA
+ remark LIMITA BANDA CLIENTE REDCARD IP 187.50.200.224
+ permit ip host 187.50.200.224 any
+ permit ip any host 187.50.200.224
+!
+access-list 35 permit 232.0.0.0 0.255.255.255
+access-list 35 permit 239.232.0.0 0.0.255.255
+</content>
   </example>
   <command name="IMPORT">
     <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>

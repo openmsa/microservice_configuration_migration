@@ -320,6 +320,12 @@ router bgp {$params.router_bgp}
 {if isset($params.bgp_dampening)}
   address-family ipv4 unicast {$params.bgp_dampening}
 {/if}
+{if isset($params.bgp_dio)}
+  {$params.bgp_dio}
+{/if}
+{if isset($params.bgp_max_paths_eibgp)}
+  address-family ipv4 unicast maximum-paths eibgp {$params.bgp_max_paths_eibgp}
+{/if}
  !
 {if isset($params.neighbor)}
 {foreach $params.neighbor as $neighbor}
@@ -333,6 +339,14 @@ router bgp {$params.router_bgp}
 {if isset($neighbor.bgp_ipv4_route_policy_in)} neighbor {$neighbor.bgp_vrf_neighbor} address-family ipv4 unicast  route-policy {$neighbor.bgp_ipv4_route_policy_in} in
 {/if}
 {if isset($neighbor.bgp_ipv4_route_policy_out)} neighbor {$neighbor.bgp_vrf_neighbor} address-family ipv4 unicast  route-policy {$neighbor.bgp_ipv4_route_policy_out} out
+{/if}
+{if isset($neighbor.bgp_vrf_neighbor_do)} neighbor {$neighbor.bgp_vrf_neighbor} {$neighbor.bgp_vrf_neighbor_do}
+{/if}
+{if isset($neighbor.bgp_vrf_neighbor_fob)} neighbor {$neighbor.bgp_vrf_neighbor} {$neighbor.bgp_vrf_neighbor_fob} 
+{/if}
+{if isset($neighbor.bgp_vrf_neighbor_sir)} neighbor {$neighbor.bgp_vrf_neighbor} {$neighbor.bgp_vrf_neighbor_sir}
+{/if}
+{if isset($neighbor.bgp_vrf_neighbor_timers_1)} neighbor {$neighbor.bgp_vrf_neighbor} timers {$neighbor.bgp_vrf_neighbor_timers_1} {$neighbor.bgp_vrf_neighbor_timers_2}
 {/if}
 
 {*
