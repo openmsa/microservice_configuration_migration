@@ -51,6 +51,7 @@ multicast-routing
 {if isset($vrf.vrf_mdt_data)}
   mdt data {$vrf.vrf_mdt_data}{if isset($vrf.vrf_mdt_data_threshold)} threshold {$vrf.vrf_mdt_data_threshold}
 {/if}
+  {"\n"}
 {/if}
 {if isset($vrf.vrf_mdt_mtu)}
   mdt mtu {$vrf.vrf_mdt_mtu}
@@ -76,6 +77,7 @@ multicast-routing
   {if isset($af.vrf_mdt_data)}
    mdt data {$af.vrf_mdt_data}{if isset($af.vrf_mdt_data_threshold)} threshold {$af.vrf_mdt_data_threshold}
    {/if}
+   {"\n"}
   {/if}
   {if isset($af.vrf_mdt_mtu)}
    mdt mtu {$af.vrf_mdt_mtu}
