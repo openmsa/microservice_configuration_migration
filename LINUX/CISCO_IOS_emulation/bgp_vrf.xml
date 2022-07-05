@@ -238,6 +238,9 @@
     <variable displayName="bgp_vrf_neighbo_down" name="params.neighbor.0.bgp_vrf_neighbo_down" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_vrf_neighbor_down" name="params.neighbor.0.bgp_vrf_neighbor_down" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_dio" name="params.bgp_dio" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_allow_as_2" name="params.neighbor.0.bgp_vrf_allow_as_2" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_redistrib_connected_policy" name="params.bgp_vrf_redistrib_connected_policy" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_redistrib_connected_pol" name="params.bgp_vrf_redistrib_connected_pol" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>vrf definition FAZENDA
@@ -426,6 +429,7 @@ address-family ipv4 vrf FAZENDA
             <regexp>@^\s*neighbor\s+(?&lt;bgp_vrf_neighbor&gt;\S+)\s+(?&lt;bgp_vrf_neighbor_sir&gt;soft-reconfiguration inbound$)@</regexp>
             <regexp>@^\s*neighbor\s+(?&lt;bgp_vrf_neighbor&gt;\S+)\s+timers\s+(?&lt;bgp_vrf_neighbor_timers_1&gt;\d+)\s+(?&lt;bgp_vrf_neighbor_timers_2&gt;\d+)$@</regexp>
             <regexp>@^\s*neighbor\s+(?&lt;bgp_vrf_neighbor&gt;\S+)\s+(?&lt;bgp_vrf_neighbor_down&gt;shutdown$)@</regexp>
+            <regexp>@^\s*neighbor\s+(?&lt;bgp_vrf_neighbor&gt;\S+)\s+(?&lt;bgp_vrf_allow_as_2&gt;)allowas-in$@</regexp>
           </array>
           <regexp/>
           <xpath/>
@@ -575,6 +579,11 @@ address-family ipv4 vrf FAZENDA
         <line>
           <array/>
           <regexp>@^\s*(?&lt;bgp_dio&gt;default-information originate)$@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@^\s*redistribute\s+(?&lt;bgp_vrf_redistrib_policy&gt;connected)\s+route-map\s+(?&lt;bgp_vrf_redistrib_connected_pol&gt;.*)$@</regexp>
           <xpath/>
         </line>
         <ignore>

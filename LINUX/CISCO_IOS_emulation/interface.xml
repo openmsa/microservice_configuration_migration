@@ -430,6 +430,13 @@
     <variable displayName="subslot_num" name="params.subslot_num" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="interface_num" name="params.interface_num" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="orig_object_id" name="params.orig_object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrrp_host" name="params.vrrp.0.vrrp_host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrrp_priority" name="params.vrrp.0.vrrp_priority" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="hsrp_group" name="params.hsrp.0.hsrp_group" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrrp_host" name="params.hsrp.0.vrrp_host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="hsrp_priority" name="params.hsrp.0.hsrp_priority" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="hsrp_host" name="params.hsrp.0.hsrp_host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="hsrp_preempt" name="params.hsrp.0.hsrp_preempt" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>!
@@ -768,7 +775,9 @@ interface Serial1/0/0.1/3/1/1:0
                 <regexp>@^\s+exit-vrrp@</regexp>
               </ignore>
             </lines>
-            <regexp>@^\s+vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+address-family\s+(?&lt;vrrp_address_family&gt;\S+)@</regexp>
+            <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+address-family\s+(?&lt;vrrp_address_family&gt;\S+)@</regexp>
+            <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+ip\s+(?&lt;vrrp_host&gt;.*)$@</regexp>
+            <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+priority\s+(?&lt;vrrp_priority&gt;\d+)$@</regexp>
           </array>
           <regexp/>
           <xpath/>
@@ -821,6 +830,15 @@ interface Serial1/0/0.1/3/1/1:0
         <line>
           <array/>
           <regexp>@^\s+xconnect\s+(?&lt;xconnect_peer_ip&gt;\S+)\s+(?&lt;xconnect_vc_id&gt;\d+)\s+encapsulation\s+(?&lt;xconnect_mode&gt;mpls|l2tpv3)@</regexp>
+          <xpath/>
+        </line>
+        <line>
+          <array name="hsrp">
+            <regexp>@^\s*standby\s+(?&lt;hsrp_group&gt;\d+)\s+ip\s+(?&lt;hsrp_host&gt;.*)$@</regexp>
+            <regexp>@^\s*standby\s+(?&lt;hsrp_group&gt;\d+)\s+priority\s+(?&lt;hsrp_priority&gt;.*)$@</regexp>
+            <regexp>@^\s*standby\s+(?&lt;hsrp_group&gt;\d+)\s+(?&lt;hsrp_preempt&gt;preempt$)@</regexp>
+          </array>
+          <regexp/>
           <xpath/>
         </line>
         <ignore>

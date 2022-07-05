@@ -317,6 +317,9 @@ router bgp {$params.router_bgp}
 {if isset($params.bgp_vrf_redistrib_static_policy)}
   address-family ipv4 unicast redistribute static route-policy {$params.bgp_vrf_redistrib_static_policy}
 {/if}
+{if isset($params.bgp_vrf_redistrib_connected_pol)}
+  address-family ipv4 unicast redistribute connected route-policy {$params.bgp_vrf_redistrib_connected_pol}
+{/if}
 {if isset($params.bgp_dampening)}
   address-family ipv4 unicast {$params.bgp_dampening}
 {/if}
@@ -348,7 +351,8 @@ router bgp {$params.router_bgp}
 {/if}
 {if isset($neighbor.bgp_vrf_neighbor_timers_1)} neighbor {$neighbor.bgp_vrf_neighbor} timers {$neighbor.bgp_vrf_neighbor_timers_1} {$neighbor.bgp_vrf_neighbor_timers_2}
 {/if}
-
+{if isset($neighbor.bgp_vrf_allow_as_2)} neighbor {$neighbor.bgp_vrf_neighbor} allowas-in
+{/if}
 {*
 {if isset($neighbor.bgp_ipv4_private_as)} {$neighbor.bgp_ipv4_private_as}
 {/if}
