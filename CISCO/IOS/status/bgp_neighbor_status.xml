@@ -149,7 +149,7 @@ Sent: 1523453 (retransmit: 1304 fastretransmit: 0),with data: 773766, total data
 </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.neighbor)} show ip bgp neighbors {$params.neighbor} {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.neighbor)} show ip bgp neighbors {$params.neighbor}{/if}]]></operation>
    <post_template>
 {if isset($params.object_id)}
   {assign_object_variable var=&quot;neighbor&quot; value=$params.object_id}

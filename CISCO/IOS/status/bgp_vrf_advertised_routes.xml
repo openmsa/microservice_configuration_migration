@@ -49,7 +49,7 @@ Total number of prefixes 375
  </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id) && isset($params.neighbor)} show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor} advertised-routes {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id) && isset($params.neighbor)} show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor} advertised-routes{/if}]]></operation>
     <post_template>
     </post_template>
     <parser>

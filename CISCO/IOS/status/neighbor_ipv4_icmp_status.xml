@@ -40,7 +40,7 @@
     </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset ($params.ip)} ping {$params.ip} {/if}]]></operation>
+    <operation><![CDATA[{if isset ($params.ip)} ping {$params.ip}{/if}]]></operation>
        <post_template>
 {if isset($object_id)}
   {assign_object_variable var=&quot;ip&quot; value=$params.object_id}

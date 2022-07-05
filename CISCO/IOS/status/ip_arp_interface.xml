@@ -38,8 +38,10 @@
 !</content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)} show ip arp | include {$params.object_id} {/if}]]></operation>
-    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;{$params.object_id}&quot;}</post_template>
+    <operation><![CDATA[{if isset($params.object_id)} show ip arp | include {$params.object_id}{/if}]]></operation>
+    <post_template>{if isset($params.object_id)}
+  {assign_object_variable var=&quot;interface_name&quot; value=$params.object_id}
+{/if}</post_template>
     <parser>
       <section>
         <regexp>@\s*show ip arp\s*|\s*include (?&lt;object_id&gt;.*)@</regexp>
