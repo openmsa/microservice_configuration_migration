@@ -52,7 +52,7 @@ Neighbor V AS MsgRcvd MsgSent TblVer  InQ OutQ Up/Down State/PfxRcd
 </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)}/config/extract_part_of_simulated_file.py /config/cisco_ios/test.status "show bgp vrf {$params.object_id} summary" {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id)} show bgp vrf {$params.object_id} summary{/if}]]></operation>
     <parser>
       <section>
         <regexp>@show bgp vrf\s+(?&lt;object_id&gt;.*)\s+summary@</regexp>

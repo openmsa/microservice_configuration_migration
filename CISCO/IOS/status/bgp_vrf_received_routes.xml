@@ -50,7 +50,7 @@ Total number of prefixes 4
  </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id) && isset($params.neighbor)} show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor} routes {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id) && isset($params.neighbor)} show ip bgp vpnv4 vrf {$params.object_id} neighbors {$params.neighbor} routes{/if}]]></operation>
     <parser>
       <section>
         <regexp>@\s*show ip bgp vpnv4 vrf (?&lt;object_id&gt;\S*) neighbors (?&lt;neighbor&gt;\S*) routes@</regexp>

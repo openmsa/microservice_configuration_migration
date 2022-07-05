@@ -50,7 +50,7 @@ Total number of prefixes 2
  </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.neighbor)} show bgp neighbors {$params.neighbor} routes {/if}]]></operation>
+    <operation><![CDATA[{if isset($params.neighbor)} show bgp neighbors {$params.neighbor} routes{/if}]]></operation>
     <post_template>
 {if isset($params.object_id)}
   {assign_object_variable var=&quot;neighbor&quot; value=$params.object_id}
