@@ -26,6 +26,7 @@
   </information>
   <variables frozen="0">
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="type" name="params.type" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="acl_seq_number" name="params.access_list.0.acl_seq_number" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="acl_rule" name="params.access_list.0.acl_rule" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="acl_protocol" name="params.access_list.0.acl_protocol" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
@@ -71,12 +72,19 @@
     </parser>
   </command>
   <command name="CREATE">
-    <operation><![CDATA[{if isset($params.access_list)}
+    <operation><![CDATA[{if (isset($params.access_list) && isset($params.type))}
 !
+{if $params.type == "ip"}
 ipv4 access-list {$params.object_id}
 {foreach $params.access_list|@sortby_typed:"acl_seq_number:int" as $acl}
 {$acl.acl_seq_number} {if isset($acl.acl_rule)}{$acl.acl_rule}{/if} {if isset($acl.acl_protocol)}{$acl.acl_protocol}{/if} {if isset($acl.acl_src)}{$acl.acl_src}{/if} {if isset($acl.acl_src_ip)}{$acl.acl_src_ip}{/if} {if isset($acl.acl_src_imask)}{$acl.acl_src_imask}{/if} {if isset($acl.acl_src_port) && $acl.acl_src_port} eq {$acl.acl_src_port}{/if} {if isset($acl.acl_dest)}{$acl.acl_dest}{/if} {if isset($acl.acl_dest_ip)}{$acl.acl_dest_ip}{/if} {if isset($acl.acl_dest_imask)}{$acl.acl_dest_imask}{/if} {if isset($acl.acl_dest_port) && $acl.acl_dest_port} eq {$acl.acl_dest_port}{/if} {if isset($acl.acl_dest_range) && $acl.acl_dest_range} range {$acl.acl_dest_range}{/if} {if isset($acl.acl_log)}{$acl.acl_log}{/if} {if isset($acl.acl_fragments)}{$acl.acl_fragments}{/if} {if isset($acl.acl_dscp)}{$acl.acl_dscp}{/if} {if isset($acl.acl_icmp_msg)}{$acl.acl_icmp_msg}{/if} 
 {/foreach}
+{else}
+ipv6 access-list {$params.object_id}
+{foreach $params.access_list|@sortby_typed:"acl_seq_number:int" as $acl}
+{$acl.acl_seq_number} {if isset($acl.acl_rule)}{$acl.acl_rule}{/if} {if isset($acl.acl_protocol)}{$acl.acl_protocol}{/if} {if isset($acl.acl_src)}{$acl.acl_src}{/if} {if isset($acl.acl_src_ip)}{$acl.acl_src_ip}{/if}{if isset($acl.acl_src_mask_length)}/{$acl.acl_src_mask_length}{else} {/if} {if isset($acl.acl_src_port) && $acl.acl_src_port} eq {$acl.acl_src_port}{/if} {if isset($acl.acl_dest)}{$acl.acl_dest}{/if} {if isset($acl.acl_dest_ip)}{$acl.acl_dest_ip}{/if} {if isset($acl.acl_dest_mask_length)}/{$acl.acl_dest_mask_length}{/if} {if isset($acl.acl_dest_port) && $acl.acl_dest_port} eq {$acl.acl_dest_port}{/if} {if isset($acl.acl_dest_range) && $acl.acl_dest_range} range {$acl.acl_dest_range}{/if} {if isset($acl.acl_log)}{$acl.acl_log}{/if} {if isset($acl.acl_fragments)}{$acl.acl_fragments}{/if} {if isset($acl.acl_dscp)}{$acl.acl_dscp}{/if} {if isset($acl.acl_icmp_msg)}{$acl.acl_icmp_msg}{/if} 
+{/foreach}
+{/if}
 !
 root
 {/if}
