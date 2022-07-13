@@ -1,0 +1,72 @@
+<ObjectDefinition>
+  <information>
+    <icon>none</icon>
+    <description></description>
+    <displayField>object_id</displayField>
+    <serviceTaskType/>
+    <order>0</order>
+    <visibility>5</visibility>
+    <configType>cli</configType>
+    <createTemplateId/>
+    <createTemplateObject/>
+    <defaultDisplay>false</defaultDisplay>
+    <dynamic>false</dynamic>
+    <importIfMandatoryPresent>false</importIfMandatoryPresent>
+    <maxInstances>0</maxInstances>
+    <relatedObjects/>
+    <name>ip_pim</name>
+    <group>EMULATION|CISCO|IOS</group>
+    <importonce>false</importonce>
+    <importrank>57</importrank>
+    <reorderinstances>false</reorderinstances>
+    <sortascending>false</sortascending>
+    <sortauto>false</sortauto>
+    <sortnumerical>false</sortnumerical>
+    <sortvariable>params._order</sortvariable>
+  </information>
+  <variables frozen="0">
+    <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="pim_vrf_name" name="params.pim_vrf_name" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="1" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="pim_rp_address" name="params.pim_rp_address" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="2" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="pim_acl" name="params.pim_acl" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="3" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="pim_override" name="params.pim_override" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+  </variables>
+  <example>
+    <content>ip pim vrf V9137:SP_DERAT rp-address 10.2.27.61 Multicast_SERPRO_239.60.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.28.61 Multicast_SERPRO_239.59.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.29.61 Multicast_SERPRO_239.58.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.41.61 Multicast_SERPRO_239.52.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.43.61 Multicast_SERPRO_239.53.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.44.61 Multicast_SERPRO_239.57.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.2.56.61 Multicast_SERPRO_239.56.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.6.24.225 Multicast_SERPRO_239.54.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.51.0.254 Multicast_SERPRO_239.51.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.55.0.56 Multicast_SERPRO_239.55.0.0
+ip pim vrf V9137:SP_DERAT rp-address 10.55.0.50 Multicast_SERPRO_239.55.0.0 override
+ip pim vrf V9137:SP_DERAT rp-address 10.55.0.57 override
+
+
+</content>
+  </example>
+  <command name="IMPORT">
+    <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>
+    <post_template>{assign_object_variable
+        var=&quot;object_id&quot;
+        value=&quot;{$params.pim_vrf_name}_{$params.pim_rp_address}&quot;
+}</post_template>
+    <parser>
+      <section>
+        <regexp>@^ip\spim\svrf\s(?&lt;pim_vrf_name&gt;\S+)\srp-address\s(?&lt;pim_rp_address&gt;\S+)\s(?&lt;pim_acl&gt;\S+)$@</regexp>
+        <regexp>@^ip\spim\svrf\s(?&lt;pim_vrf_name&gt;\S+)\srp-address\s(?&lt;pim_rp_address&gt;\S+)\s(?&lt;pim_acl&gt;\S+)\s(?&lt;pim_override&gt;override)$@</regexp>
+        <regexp>@^ip\spim\svrf\s(?&lt;pim_vrf_name&gt;\S+)\srp-address\s(?&lt;pim_rp_address&gt;\S+)\s(?&lt;pim_override&gt;override)$@</regexp>
+      </section>
+      <lines/>
+    </parser>
+  </command>
+  <command name="CREATE"/>
+  <command name="READ"/>
+  <command name="UPDATE"/>
+  <command name="CONSTRAINT"/>
+  <command name="DELETE"/>
+  <command name="LIST"/>
+</ObjectDefinition>
