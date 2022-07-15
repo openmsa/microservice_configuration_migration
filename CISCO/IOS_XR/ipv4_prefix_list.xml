@@ -56,7 +56,8 @@
     </parser>
   </command>
   <command name="CREATE">
-    <operation><![CDATA[{if isset($params.ip_prefix_list)}
+    <operation><![CDATA[{*
+{if isset($params.ip_prefix_list)}
 !
 ipv4 prefix-list {$params.object_id}
 {if isset($params.description)}
@@ -69,7 +70,8 @@ ipv4 prefix-list {$params.object_id}
 {/foreach}
 !
 root
-{/if}]]></operation>
+{/if}
+*}]]></operation>
   </command>
   <command name="READ"/>
   <command name="UPDATE"/>
