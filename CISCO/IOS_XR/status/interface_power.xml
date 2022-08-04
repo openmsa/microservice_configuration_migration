@@ -106,6 +106,9 @@ int Gig0/0/0:
           <xpath/>
         </line>
         <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
           <regexp>@The Transceiver@</regexp>
         </ignore>
         <ignore>
