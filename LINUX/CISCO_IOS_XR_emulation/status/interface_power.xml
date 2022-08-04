@@ -92,7 +92,7 @@ int Gig0/0/0:
 	value=&quot;{$params.subslot_num}_transceiver{$params.transceiver}&quot;}</post_template>
     <parser>
       <section>
-        <regexp>@\s*show controllers (?&lt;object_id&gt;.*) phy@</regexp>
+        <regexp>@#\s*show controllers (?&lt;object_id&gt;.*) phy@</regexp>
       </section>
       <lines>
         <line>
@@ -105,6 +105,9 @@ int Gig0/0/0:
           <regexp>@^\s*Tx power: (?&lt;interface_power_rx&gt;.*dBm )@</regexp>
           <xpath/>
         </line>
+        <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
         <ignore>
           <regexp>@The Transceiver@</regexp>
         </ignore>
