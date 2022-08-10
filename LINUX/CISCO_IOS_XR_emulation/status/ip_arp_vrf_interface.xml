@@ -40,7 +40,7 @@
   </example>
   <command name="IMPORT">
     <operation><![CDATA[{if isset($params.object_id) and isset($params.vrf_name) } /config/extract_part_of_simulated_file.py /config/cisco_ios_xr/test.status "show arp vrf {$params.vrf_name} | include {$params.object_id}"  {/if}]]></operation>
-    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;{$params.object_id}&quot;}</post_template>
+    <post_template>{assign_object_variable var=&quot;interface_name&quot; value=&quot;$params.object_id&quot;}</post_template>
     <parser>
       <section>
         <regexp>@\s*show\s+arp\s+vrf\s+(?&lt;vrf_name&gt;\S+)\s*|\s*include\s+(?&lt;object_id&gt;.*)@</regexp>
