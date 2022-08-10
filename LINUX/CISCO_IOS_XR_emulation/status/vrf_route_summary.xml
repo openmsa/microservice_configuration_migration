@@ -82,6 +82,15 @@ Total  2842  1  0  386648
           <regexp>@^\s*!@</regexp>
         </ignore>
         <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ BRSPO@</regexp>
+        </ignore>
+        <ignore>
           <regexp>@IP routing table@</regexp>
         </ignore>
         <ignore>
