@@ -303,11 +303,11 @@ policy-map  {$params.object_id}
   shape {$pmap_class.shape} {$pmap_class.shape_rate} bps{if isset($pmap_class.shape_excess_burst)} {$pmap_class.shape_excess_burst} bytes{/if}
   {/if} 
   {if isset($pmap_class.conform_action)}
-  conform-action {$pmap_class.conform_action|replace:'-':' '|replace:'transmit':''}
+  conform-action {$pmap_class.conform_action|replace:'set-dscp-transmit':'set dscp'}
   {/if} 
   {if isset($pmap_class.exceed_action)}
     {if (!isset($pmap_class.conform_action)) || (isset($pmap_class.conform_action) && $pmap_class.conform_action !== "drop")}
-  exceed-action {$pmap_class.exceed_action|replace:'-':' '|replace:'transmit':''}
+  exceed-action {$pmap_class.exceed_action|replace:'set-dscp-transmit':'set dscp'}
     {/if}
   {/if} 
   {*if isset($pmap_class.violate_action) && (isset($pmap_class.conform_action) && $pmap_class.conform_action != "drop") && (isset($pmap_class.exceed_action) && $pmap_class.exceed_action != "drop")}
