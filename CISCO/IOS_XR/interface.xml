@@ -295,11 +295,11 @@ interface {$params.object_id}
 {if isset($params.mtu_int)}
  mtu {$params.mtu_int}
 {/if}
-{if isset($params.ip_urpf) && isset($params.ipv6_address)}
+{if isset($params.ip_urpf)}
  ipv4 verify {$params.ip_urpf}
- ipv6 verify {$params.ip_urpf}
-{else if isset($params.ip_urpf)}
- ipv4 verify {$params.ip_urpf}
+{/if}
+{if isset($params.ipv6_urpf)}
+ ipv6 verify {$params.ipv6_urpf}
 {/if}
 {if isset($params.bandwidth)}
  bandwidth {$params.bandwidth}
@@ -328,6 +328,8 @@ interface {$params.object_id}
 {/if}
 {if isset($params.vrrp)}
 {foreach $params.vrrp as $vrrp}
+{if isset($vrrp.vrrp_description)} vrrp {$vrrp.vrrp_group} ip {$vrrp.vrrp_description}
+{/if}
 {if isset($vrrp.vrrp_host)} vrrp {$vrrp.vrrp_group} ip {$vrrp.vrrp_host}
 {/if}
 {if isset($vrrp.vrrp_priority)} vrrp {$vrrp.vrrp_group} priority {$vrrp.vrrp_priority}

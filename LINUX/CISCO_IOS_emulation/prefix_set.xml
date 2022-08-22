@@ -35,12 +35,14 @@
   <example/>
   <command name="IMPORT">
     <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>
-    <post_template>{* loop over the ip_access_list instances and build the prefix_set array
+    <post_template>
+{* loop over the ip_access_list instances and build the prefix_set array
 based on each  ip_access_list src IP and mask variables *}
 {$idx=0}
 {if isset($ip_access_list)}
 	{foreach $ip_access_list as $ip_acl}
-		{if isset($ip_acl.access_list) &amp;&amp; ($ip_acl.object_id == $params.object_id)}
+		 {if isset($ip_acl.access_list) &amp;&amp; ($ip_acl.object_id == $params.object_id)}
+		    {ksort($ip_acl.access_list)}
 			{foreach $ip_acl.access_list as $acl}
 				{if isset($acl.acl_src_ip) &amp;&amp; isset($acl.acl_src_mask_length)}
 					{assign_object_variable 
@@ -65,44 +67,58 @@ based on each  ip_access_list src IP and mask variables *}
 					{assign_object_variable 
 						var=&quot;prefix_set.{$idx}.mask_length&quot; 
 						value=&quot;32&quot;}				
-					{$idx=$idx+1}
+				{$idx=$idx+1}
 				{/if}
 			{/foreach}
 			{* update the object_id by adding &quot;prefix_set_&quot; prefix *}
-			{break}
-		{/if}
+			{*{break} *}
+		 {/if} 
 	{/foreach}
 {/if}
 {$idx=0}
 {if isset($ip_prefix_list)}
+    {* Create a New Array with key Sequence *}
+    {assign var=$new_ip_prefix_list value=[] }
 	{foreach $ip_prefix_list as $ip_pref_list}
-		{if isset($ip_pref_list.name) &amp;&amp; ($ip_pref_list.name == $params.object_id)}
-			{if isset($ip_pref_list.description)}
-				{assign_object_variable 
-					var=&quot;description&quot; 
-					value=&quot;{$ip_pref_list.description}&quot;}
-
-			{/if}
-			{if isset($ip_pref_list.prefix_ip) &amp;&amp; isset($ip_pref_list.prefix_mask_length)}
-				{assign_object_variable 
-					var=&quot;prefix_set.{$idx}.src_ip&quot; 
-					value=&quot;{$ip_pref_list.prefix_ip}&quot;}
-				{assign_object_variable 
-					var=&quot;prefix_set.{$idx}.mask_length&quot; 
-					value=&quot;{$ip_pref_list.prefix_mask_length}&quot;}
-				{if isset($ip_pref_list.comp_prefix_length) &amp;&amp; isset($ip_pref_list.prefix_length)}
-					{assign_object_variable 
-						var=&quot;prefix_set.{$idx}.comp_prefix_length&quot; 
-						value=&quot;{$ip_pref_list.comp_prefix_length}&quot;}
-					{assign_object_variable 
-						var=&quot;prefix_set.{$idx}.prefix_length&quot; 
-						value=&quot;{$ip_pref_list.prefix_length}&quot;}
-				{/if}
-				{$idx=$idx+1}
-			{/if}
-		{/if}
+	    {$new_ip_prefix_list[$ip_pref_list.name][$ip_pref_list.sequence]=$ip_pref_list}
 	{/foreach}
+
+    {foreach $new_ip_prefix_list as $ip_pref_list_new}
+  	    {ksort($ip_pref_list_new)}
+  	    {foreach $ip_pref_list_new as $ip_pref_list}
+		    {if isset($ip_pref_list.name) &amp;&amp; ($ip_pref_list.name == $params.object_id)}
+			    {if isset($ip_pref_list.description)}
+				    {assign_object_variable 
+					    var=&quot;description&quot; 
+					    value=&quot;{$ip_pref_list.description}&quot;}
+
+			    {/if}
+			    {if isset($ip_pref_list.prefix_ip) &amp;&amp; isset($ip_pref_list.prefix_mask_length)}
+				    {assign_object_variable 
+					    var=&quot;prefix_set.{$idx}.src_ip&quot; 
+					    value=&quot;{$ip_pref_list.prefix_ip}&quot;}
+				    {assign_object_variable 
+					    var=&quot;prefix_set.{$idx}.mask_length&quot; 
+					    value=&quot;{$ip_pref_list.prefix_mask_length}&quot;}
+				    {if isset($ip_pref_list.comp_prefix_length) &amp;&amp; isset($ip_pref_list.prefix_length)}
+					    {assign_object_variable 
+						    var=&quot;prefix_set.{$idx}.comp_prefix_length&quot; 
+						    value=&quot;{$ip_pref_list.comp_prefix_length}&quot;}
+					    {assign_object_variable 
+						    var=&quot;prefix_set.{$idx}.prefix_length&quot; 
+						    value=&quot;{$ip_pref_list.prefix_length}&quot;}
+				    {/if}
+				    {$idx=$idx+1}
+			    {/if}
+		    {/if}
+        {/foreach}
+    {/foreach}
+	
+	
+
+
 {/if}
+
 {assign_object_variable 
 	var=&quot;object_id&quot; 
 	value=&quot;pfx_{$params.object_id}&quot;}

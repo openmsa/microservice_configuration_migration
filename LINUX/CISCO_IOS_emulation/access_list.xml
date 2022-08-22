@@ -20,7 +20,7 @@
     <importrank>1</importrank>
     <reorderinstances>false</reorderinstances>
     <sortascending>false</sortascending>
-    <sortauto>false</sortauto>
+    <sortauto>true</sortauto>
     <sortnumerical>false</sortnumerical>
     <sortvariable>params._order</sortvariable>
   </information>
@@ -44,7 +44,7 @@
     <variable displayName="acl_fragments" name="params.acl_fragments" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="acl_dscp" name="params.acl_dscp" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="acl_icmp_msg" name="params.acl_icmp_msg" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="_order" name="params._order" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="18" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="_order" name="params._order" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="18" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>access-list 120 permit tcp any eq bgp any lt 10
@@ -53,7 +53,8 @@ access-list 121 permit ip 0.0.0.0 0.255.255.255 any gt 10</content>
   </example>
   <command name="IMPORT">
     <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>
-    <post_template>{* convertion of inverted mask to mask length for compatibility with IOS XR *}
+    <post_template>
+{* convertion of inverted mask to mask length for compatibility with IOS XR *}
 {if isset($params.acl_src_imask)}
 	{capture}
 	{convert_imask_to_length input={$params.acl_src_imask} var=&quot;mask_length&quot;}
@@ -62,6 +63,14 @@ access-list 121 permit ip 0.0.0.0 0.255.255.255 any gt 10</content>
 		var=&quot;acl_src_mask_length&quot; 
 		value=$mask_length}
 {/if}
+
+{if !isset($global_counter)}
+    {assign var=global_counter value=0 scope=&quot;global&quot;}
+{/if}
+{assign var=global_counter value=$global_counter+1 scope=&quot;global&quot;}
+{assign_object_variable
+    var=&quot;_order&quot;
+    value=$global_counter}
 {*if isset($params.acl_src) &amp;&amp; $params.acl_src == &quot;any&quot;}
 	{assign_object_variable 
 		var=&quot;acl_src_ip&quot; 

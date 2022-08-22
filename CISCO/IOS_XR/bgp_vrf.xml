@@ -329,6 +329,9 @@ router bgp {$params.router_bgp}
 {if isset($params.bgp_max_paths_eibgp)}
   address-family ipv4 unicast maximum-paths eibgp {$params.bgp_max_paths_eibgp}
 {/if}
+{if isset($params.bgp_max_paths)}
+  address-family ipv4 unicast maximum-paths eibgp {$params.bgp_max_paths}
+{/if}
  !
 {if isset($params.neighbor)}
 {foreach $params.neighbor as $neighbor}
