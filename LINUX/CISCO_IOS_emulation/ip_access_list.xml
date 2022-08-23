@@ -167,7 +167,8 @@ access-list 35 permit 239.232.0.0 0.0.255.255
 {if isset($access_list)}
 	{$idx=0}
 	{$seq_number=10}
-	{foreach $access_list|@sortby_typed:&quot;acl_src_ip:ip,acl_src:string&quot; as $acl}
+	{* {foreach $access_list|@sortby_typed:&quot;acl_src_ip:ip,acl_src:string&quot; as $acl} *}
+	 {foreach $access_list as $acl}
 		{if ($acl.acl_id == $params.object_id) &amp;&amp; (!isset($acl.acl_src) || $acl.acl_src==&quot;&quot;)}
 			{$keys = array_keys($acl)}
 			{foreach $keys as $key}
@@ -183,7 +184,8 @@ access-list 35 permit 239.232.0.0 0.0.255.255
 		    {$seq_number=$seq_number+10}
 		{/if}
 	{/foreach}
-	{foreach $access_list|@sortby_typed:&quot;acl_src_ip:string&quot; as $acl}
+	{* {foreach $access_list|@sortby_typed:&quot;acl_src_ip:string&quot; as $acl} *}
+	 {foreach $access_list as $acl}
 		{if ($acl.acl_id == $params.object_id) &amp;&amp; isset($acl.acl_src) &amp;&amp; $acl.acl_src==&quot;any&quot;}
 			{$keys = array_keys($acl)}
 			{foreach $keys as $key}

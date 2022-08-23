@@ -437,6 +437,8 @@
     <variable displayName="hsrp_priority" name="params.hsrp.0.hsrp_priority" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="hsrp_host" name="params.hsrp.0.hsrp_host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="hsrp_preempt" name="params.hsrp.0.hsrp_preempt" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ipv6_urpf" name="params.ipv6_urpf" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrrp_description" name="params.vrrp.0.vrrp_description" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>!
@@ -778,6 +780,7 @@ interface Serial1/0/0.1/3/1/1:0
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+address-family\s+(?&lt;vrrp_address_family&gt;\S+)@</regexp>
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+ip\s+(?&lt;vrrp_host&gt;.*)$@</regexp>
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+priority\s+(?&lt;vrrp_priority&gt;\d+)$@</regexp>
+            <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+description\s+(?&lt;vrrp_description&gt;.*)$@</regexp>
           </array>
           <regexp/>
           <xpath/>
@@ -839,6 +842,11 @@ interface Serial1/0/0.1/3/1/1:0
             <regexp>@^\s*standby\s+(?&lt;hsrp_group&gt;\d+)\s+(?&lt;hsrp_preempt&gt;preempt$)@</regexp>
           </array>
           <regexp/>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@^\s+ipv6\s+verify\s+(?&lt;ipv6_urpf&gt;.+)@</regexp>
           <xpath/>
         </line>
         <ignore>

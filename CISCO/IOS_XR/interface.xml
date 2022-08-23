@@ -295,11 +295,11 @@ interface {$params.object_id}
 {if isset($params.mtu_int)}
  mtu {$params.mtu_int}
 {/if}
-{if isset($params.ip_urpf) && isset($params.ipv6_address)}
+{if isset($params.ip_urpf)}
  ipv4 verify {$params.ip_urpf}
- ipv6 verify {$params.ip_urpf}
-{else if isset($params.ip_urpf)}
- ipv4 verify {$params.ip_urpf}
+{/if}
+{if isset($params.ipv6_urpf)}
+ ipv6 verify {$params.ipv6_urpf}
 {/if}
 {if isset($params.bandwidth)}
  bandwidth {$params.bandwidth}
@@ -323,24 +323,6 @@ interface {$params.object_id}
 {foreach $params.mpls as $mpls}
 {if isset($mpls.mpls_mtu) and $mpls.mpls_mtu}
  mpls mtu {$mpls.mpls_mtu}
-{/if}
-{/foreach}
-{/if}
-{if isset($params.vrrp)}
-{foreach $params.vrrp as $vrrp}
-{if isset($vrrp.vrrp_host)} vrrp {$vrrp.vrrp_group} ip {$vrrp.vrrp_host}
-{/if}
-{if isset($vrrp.vrrp_priority)} vrrp {$vrrp.vrrp_group} priority {$vrrp.vrrp_priority}
-{/if}
-{/foreach}
-{/if}
-{if isset($params.hsrp)}
-{foreach $params.hsrp as $hsrp}
-{if isset($hsrp.hsrp_host)} standby {$hsrp.hsrp_group} ip {$hsrp.hsrp_host}
-{/if}
-{if isset($hsrp.hsrp_priority)} standby {$hsrp.hsrp_group} priority {$hsrp.hsrp_priority}
-{/if}
-{if isset($hsrp.hsrp_preempt)} standby {$hsrp.hsrp_group} preempt
 {/if}
 {/foreach}
 {/if}
@@ -369,7 +351,43 @@ root
 !
 {/if}
 {/if}
-!]]></operation>
+!
+{if isset($params.vrrp)}
+router vrrp
+interface {$params.object_id}
+address-family ipv4
+{foreach $params.vrrp as $vrrp}
+{if isset($vrrp.vrrp_group)} vrrp {$vrrp.vrrp_group}
+{/if}
+{if isset($vrrp.vrrp_host)} address {$vrrp.vrrp_host}
+{/if}
+{if isset($vrrp.vrrp_priority)} priority {$vrrp.vrrp_priority}
+{/if}
+{if isset($hsrp.vrrp_preempt)} preempt
+{/if}
+{/foreach}
+root
+!
+{/if}
+{if isset($params.hsrp)}
+router hsrp
+interface {$params.object_id}
+address-family ipv4
+{foreach $params.hsrp as $hsrp}
+{if isset($hsrp.hsrp_group)} hsrp {$hsrp.hsrp_group}
+{/if}
+{if isset($hsrp.hsrp_host)} address {$hsrp.hsrp_host}
+{/if}
+{if isset($hsrp.hsrp_priority)} priority {$hsrp.hsrp_priority}
+{/if}
+{if isset($hsrp.hsrp_preempt)} preempt
+{/if}
+{/foreach}
+root
+!
+{/if}
+
+]]></operation>
   </command>
   <command name="READ">
     <operation><![CDATA[<pre>

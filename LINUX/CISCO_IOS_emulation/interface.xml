@@ -437,20 +437,26 @@
     <variable displayName="hsrp_priority" name="params.hsrp.0.hsrp_priority" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="hsrp_host" name="params.hsrp.0.hsrp_host" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="hsrp_preempt" name="params.hsrp.0.hsrp_preempt" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="ipv6_urpf" name="params.ipv6_urpf" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="vrrp_description" name="params.vrrp.0.vrrp_description" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>!
-interface Serial1/0/0.1/3/1/1:0
- description By VPNSC: Job Id# = 176159 (Sabesp_Braganca_Paulista_SP_582829)
- ip vrf forwarding V4815:Sabesp_Intragov
- ip address 186.239.4.165 255.255.255.252
+interface GigabitEthernet1/0/1.1538
+ description GigabitEthernet1/0/1.1538 dot1q vlan id=1538. By VPNSC: Job Id# = 410404 (Sonda_Procwork_Informatica_Ltda_SPBAP_927862)
+ bandwidth 200000
+ encapsulation dot1Q 1538
+ ip address 189.108.133.1 255.255.255.252 secondary
+ ip address 187.8.121.61 255.255.255.252
  no ip redirects
+ no ip unreachables
  no ip proxy-arp
- encapsulation ppp
- no fair-queue
- no cdp enable
- max-reserved-bandwidth 95
- service-policy output toCE-240-0-640-10-20
+ ip verify unicast source reachable-via any
+ ip flow monitor MONITOR-IPV4 sampler SAMPLER-1-OUT-1000 input
+ ip flow ingress
+ ipv6 address 2001:12E0:300:1023:A008:1:0:4/127
+ ipv6 enable
+ service-policy output EBGP_SECURITY_OUT_2010_SONDA
 !</content>
   </example>
   <command name="IMPORT">
@@ -778,6 +784,7 @@ interface Serial1/0/0.1/3/1/1:0
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+address-family\s+(?&lt;vrrp_address_family&gt;\S+)@</regexp>
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+ip\s+(?&lt;vrrp_host&gt;.*)$@</regexp>
             <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+priority\s+(?&lt;vrrp_priority&gt;\d+)$@</regexp>
+            <regexp>@^\s*vrrp\s+(?&lt;vrrp_group&gt;\d+)\s+description\s+(?&lt;vrrp_description&gt;.*)$@</regexp>
           </array>
           <regexp/>
           <xpath/>
@@ -839,6 +846,11 @@ interface Serial1/0/0.1/3/1/1:0
             <regexp>@^\s*standby\s+(?&lt;hsrp_group&gt;\d+)\s+(?&lt;hsrp_preempt&gt;preempt$)@</regexp>
           </array>
           <regexp/>
+          <xpath/>
+        </line>
+        <line>
+          <array/>
+          <regexp>@^\s+ipv6\s+verify\s+(?&lt;ipv6_urpf&gt;.+)@</regexp>
           <xpath/>
         </line>
         <ignore>
