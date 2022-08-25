@@ -32,6 +32,7 @@
         <sections>statements</sections>
       </sections>
     </variable>
+    <variable displayName="matchflag" name="params.statements.0.matchflag" startIncrement="0" type="Integer" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="30" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="true" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="action" name="params.statements.0.action" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="19" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false">
       <sections>
         <sections>statements</sections>
@@ -199,6 +200,9 @@
 		{assign_object_variable
 			var=&quot;statements.{$statement_idx}.priority&quot;
 			value=&quot;{$rm.priority}&quot;}
+		{assign_object_variable
+			var=&quot;statements.{$statement_idx}.matchflag&quot;
+			value=1}	
 		{if isset($rm.sorted_matches)}
 			{$as_path_idx=0}
 			{$comm_idx=0}					
@@ -320,6 +324,10 @@
 					{/if}
 				{/if}
 			{/foreach}
+		{else}
+		{assign_object_variable
+			var=&quot;statements.{$statement_idx}.matchflag&quot;
+			value=0}	
 		{/if}
 		{$block_idx=0}
 		{if isset($rm.sets)}

@@ -442,8 +442,8 @@
   </variables>
   <example>
     <content>!
-interface GigabitEthernet1/0/1.1538
- description GigabitEthernet1/0/1.1538 dot1q vlan id=1538. By VPNSC: Job Id# = 410404 (Sonda_Procwork_Informatica_Ltda_SPBAP_927862)
+interface GigabitEthernet0.1538
+ description GigabitEthernet0.1538 dot1q vlan id=1538. By VPNSC: Job Id# = 410404 (Sonda_Procwork_Informatica_Ltda_SPBAP_927862)
  bandwidth 200000
  encapsulation dot1Q 1538
  ip address 189.108.133.1 255.255.255.252 secondary
@@ -451,9 +451,8 @@ interface GigabitEthernet1/0/1.1538
  no ip redirects
  no ip unreachables
  no ip proxy-arp
- ip verify unicast source reachable-via any
  ip flow monitor MONITOR-IPV4 sampler SAMPLER-1-OUT-1000 input
- ip flow ingress
+ ip verify unicast source reachable-via any
  ipv6 address 2001:12E0:300:1023:A008:1:0:4/127
  ipv6 enable
  service-policy output EBGP_SECURITY_OUT_2010_SONDA

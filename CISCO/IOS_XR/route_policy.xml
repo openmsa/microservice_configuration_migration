@@ -239,6 +239,7 @@ end policy
   <command name="CREATE">
     <operation><![CDATA[{if isset($params.statements)}
 !
+
 route-policy {$params.object_id}
 {foreach $params.statements|@sortby_typed:"priority:int" as $statements}
   {$continue=false}
@@ -264,7 +265,7 @@ route-policy {$params.object_id}
   {$idx=0}
   {* clean up the list of keys *}
   {foreach $keys as $key}
-    {if $key == "block" || $key == "_order" || $key == "priority" || $key == "action"}
+    {if $key == "block" || $key == "_order" || $key == "priority" || $key == "action" || $key == "matchflag" } 
       {continue}
     {/if}
     {$clean_keys[$idx]=$key}
@@ -274,6 +275,7 @@ route-policy {$params.object_id}
   {$last=false}
   {if isset($clean_keys) && ($clean_keys|@count > 0)}
   {strip}
+
   {foreach $clean_keys as $key}
     {if $statements@first && $first} if{else if ($statements@total>1 && !$statements@first && $first)} elseif {/if}   
     {if $continue==true && !$continue_is_set}{$continue_is_set=true} not {/if}     
@@ -379,11 +381,13 @@ route-policy {$params.object_id}
   {if $statements@last}
   
 else 
-    {if $statements.action == "permit" && $statements@total == 1}
-  drop
-    {else if $statements.action == "deny" && $statements@total > 1 }
-  drop
-    {else if $statements.action == "permit" && $statements@total > 1 }
+    {*
+    {foreach $statements as $key => $value}
+        {$key}
+        {$value}
+    {/foreach}
+    *}
+    {if (($statements.action == "permit") &&  ($statements.matchflag == 0)) }
   pass
     {else}
   drop

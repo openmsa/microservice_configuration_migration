@@ -199,6 +199,9 @@
 		{assign_object_variable
 			var=&quot;statements.{$statement_idx}.priority&quot;
 			value=&quot;{$rm.priority}&quot;}
+		{assign_object_variable
+			var=&quot;statements.{$statement_idx}.matchflag&quot;
+			value=1}
 		{if isset($rm.sorted_matches)}
 			{$as_path_idx=0}
 			{$comm_idx=0}					
@@ -320,6 +323,10 @@
 					{/if}
 				{/if}
 			{/foreach}
+		{else}
+		{assign_object_variable
+			var=&quot;statements.{$statement_idx}.matchflag&quot;
+			value=0}	
 		{/if}
 		{$block_idx=0}
 		{if isset($rm.sets)}
