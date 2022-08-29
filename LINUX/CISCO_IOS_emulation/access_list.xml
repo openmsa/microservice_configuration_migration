@@ -52,7 +52,7 @@ access-list 120 permit tcp any any eq bgp
 access-list 121 permit ip 0.0.0.0 0.255.255.255 any gt 10</content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>
+    <operation><![CDATA[cat /config/cisco_ios/test.conf  | /usr/bin/grep -e ^access-list ]]></operation>
     <post_template>
 {* convertion of inverted mask to mask length for compatibility with IOS XR *}
 {if isset($params.acl_src_imask)}
