@@ -43,7 +43,9 @@
 !
 key chain {$params.object_id}
  key {$params.key}
-   key-string 7 {$params.key_string}
+   accept-lifetime 00:00:00 january 01 1993 infinite
+   key-string password {$params.key_string}
+   send-lifetime 00:00:00 january 01 1993 infinite
 !
 root
 {/if}]]></operation>
