@@ -66,7 +66,21 @@
     </parser>
   </command>
   <command name="CREATE">
-    <operation><![CDATA[{if isset($params.matches)}
+    <operation><![CDATA[{capture}
+{assign var="match_acl_type" value=[]}
+{foreach $params.matches as $m}
+    {foreach $ip_access_list as $ip_acl}
+        {if $ip_acl.object_id == $m.match_access_group_value }
+            {if $ip_acl.type == 'ipv6'}
+                {$match_acl_type.{$m.match_access_group_value} = "ipv6"}
+            {else}
+                {$match_acl_type.{$m.match_access_group_value} = "ipv4"}
+            {/if}
+        {/if}
+    {/foreach}
+{/foreach}
+{/capture}
+{if isset($params.matches)}
 !
 class-map {$params.statement} {$params.object_id}
 {foreach $params.matches as $m}
@@ -75,7 +89,7 @@ class-map {$params.statement} {$params.object_id}
   {if isset($m.match_any)} {$m.match_any} 
   {else if isset($m.match_cmd_dscp)}{$m.match_cmd_dscp} 
   {else if isset($m.match_cmd_precedence)}{$m.match_cmd_precedence} 
-  {else if isset($m.match_cmd_access_group) && isset($m.match_access_group_value)}{$m.match_cmd_access_group} ipv4 {$m.match_access_group_value}
+  {else if isset($m.match_cmd_access_group) && isset($m.match_access_group_value)}{$m.match_cmd_access_group} {$match_acl_type.{$m.match_access_group_value}} {$m.match_access_group_value}
   {else if isset($m.match_cmd_mpls)}{$m.match_cmd_mpls} {/if} {if isset($m.match_value)}{$m.match_value}  
   {/if}
 {/strip}
