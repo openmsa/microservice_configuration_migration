@@ -83,16 +83,17 @@
 {if isset($params.matches)}
 !
 class-map {$params.statement} {$params.object_id}
+
 {foreach $params.matches as $m}
-{strip}
   match {if isset($m.not)} {$m.not} {/if}
+  {strip}
   {if isset($m.match_any)} {$m.match_any} 
   {else if isset($m.match_cmd_dscp)}{$m.match_cmd_dscp} 
   {else if isset($m.match_cmd_precedence)}{$m.match_cmd_precedence} 
   {else if isset($m.match_cmd_access_group) && isset($m.match_access_group_value)}{$m.match_cmd_access_group} {$match_acl_type.{$m.match_access_group_value}} {$m.match_access_group_value}
   {else if isset($m.match_cmd_mpls)}{$m.match_cmd_mpls} {/if} {if isset($m.match_value)}{$m.match_value}  
+  {/strip}
   {/if}
-{/strip}
 {/foreach}
 
 end-class-map
