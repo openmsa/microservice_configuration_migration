@@ -244,6 +244,15 @@
     <operation><![CDATA[{if isset ($params.router_bgp) && (isset($params.neighbors) && count($params.neighbors) > 0)}
 !
 router bgp {$params.router_bgp}
+{capture}
+{assign var="unique_neighbors" value=[]}
+{foreach $params.neighbors  as $neighbor}
+    {$unique_neighbors[$neighbor.bgp_neighbor] = {$params.bgp_address_family}} 
+{/foreach}
+{/capture}
+{foreach $unique_neighbors as $key => $value}
+ neighbor {$key} address-family {$value} unicast
+{/foreach}
 {foreach $params.neighbors  as $neighbor}
 {if isset($neighbor.bgp_ipv4_private_as)} neighbor {$neighbor.bgp_neighbor} address-family {$params.bgp_address_family} unicast {$neighbor.bgp_ipv4_private_as}
 {/if}
