@@ -379,20 +379,18 @@ route-policy {$params.object_id}
     {/if}
   {/if} {* END {if isset($statements.block)} *}
   {if $statements@last}
-  
-else 
-    {*
-    {foreach $statements as $key => $value}
-        {$key}
-        {$value}
-    {/foreach}
-    *}
+
+{if   ($params.statements|@count == 1 && $statements.matchflag == 0 && !isset($statements.block)) }
+!
+{else}
+else
     {if (($statements.action == "permit") &&  ($statements.matchflag == 0)) }
   pass
     {else}
   drop
     {/if}
 endif
+{/if}
   {/if} {* end {if $statements@last} *}
 {/foreach} {* end {foreach $params.statements|@sortby_typed:"priority:int" as $statements} *}
 !
