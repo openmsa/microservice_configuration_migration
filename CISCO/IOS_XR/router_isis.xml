@@ -144,7 +144,7 @@ router {$params.object_id} 1
 
 {foreach $params.interfaces as $itf}
  interface {$itf.interface}
- {if isset($itf.isis_circuit_level)} circuit-type {$params.isis_circuit_level}
+ {if isset($itf.isis_circuit_level)} circuit-type {$itf.isis_circuit_level}
  {/if}
   {if isset($itf.isis_auth_key)}  hello-padding disable
    hello-password keychain  {$itf.isis_auth_key}
