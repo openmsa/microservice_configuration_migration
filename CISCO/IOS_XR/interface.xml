@@ -384,7 +384,11 @@ root
 !
 {/if}
 {if isset($params.pim_mode) and $params.pim_mode}
+{if isset($params.vrf_name)}
+router pim vrf {$params.vrf_name} address-family ipv4 interface {$params.object_id} enable
+{else}
 router pim address-family ipv4 interface {$params.object_id} enable
+{/if}
 {/if}
 !
 root

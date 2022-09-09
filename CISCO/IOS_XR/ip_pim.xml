@@ -45,12 +45,12 @@
 {if isset($params.pim_acl)}
 !
 {if isset($params.pim_override)}
-router pim vrf {$params.pim_vrf_name} ipv4 rp-address {$params.pim_rp_address} {$params.pim_acl} {$params.pim_override} 
+router pim vrf {$params.pim_vrf_name} address-family ipv4 rp-address {$params.pim_rp_address} {$params.pim_acl} {$params.pim_override} 
 {else}
-router pim vrf {$params.pim_vrf_name} ipv4 rp-address {$params.pim_rp_address} {$params.pim_acl}
+router pim vrf {$params.pim_vrf_name} address-family ipv4 rp-address {$params.pim_rp_address} {$params.pim_acl}
 {/if}
 {else}
-router pim vrf {$params.pim_vrf_name} ipv4 rp-address {$params.pim_rp_address}  
+router pim vrf {$params.pim_vrf_name} address-family ipv4 rp-address {$params.pim_rp_address}  
 {/if}
 {/if}
 !
