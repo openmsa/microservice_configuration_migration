@@ -140,7 +140,7 @@
   <command name="CREATE">
     <operation><![CDATA[{if isset($params.interfaces) && count($params.interfaces) > 0}
 !
-router {$params.object_id} 1
+router {$params.object_id} 0
 
 {foreach $params.interfaces as $itf}
  interface {$itf.interface}
