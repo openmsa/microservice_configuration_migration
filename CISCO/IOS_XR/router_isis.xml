@@ -147,11 +147,11 @@ router {$params.object_id} 0
  {if isset($itf.isis_circuit_level)} circuit-type {$itf.isis_circuit_level}
  {/if}
   {if isset($itf.isis_auth_key)}  hello-padding disable
-   hello-password keychain  {$itf.isis_auth_key}
+   hello-password keychain {$itf.isis_auth_key}
   {/if}
   {if isset($itf.isis_network)}  {$itf.isis_network}
   {/if}
-  {if isset($itf.isis_csnp_interval) and isset($itf.isis_csnp_level)}  csnp-interval  {$itf.isis_csnp_interval} {$itf.isis_csnp_level}}  
+  {if isset($itf.isis_csnp_interval) and isset($itf.isis_csnp_level)} csnp-interval {$itf.isis_csnp_interval} {$itf.isis_csnp_level}
   {/if}
   {foreach $itf.metric as $metric} 
     {if isset($metric.isis_metric_level) and isset($metric.isis_metric)}   address-family ipv4 unicast
