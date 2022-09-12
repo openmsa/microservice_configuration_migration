@@ -293,7 +293,7 @@ interface {$params.object_id}
  ipv6 {$params.ipv6_enable}
 {/if}
 {if isset($params.mtu_int)}
- mtu {$params.mtu_int}
+ mtu {$params.mtu_int+14}
 {/if}
 {if isset($params.ip_urpf)}
  ipv4 verify {$params.ip_urpf}
@@ -330,11 +330,8 @@ interface {$params.object_id}
  carrier-delay {if isset($params.carrier_delay_up)} up {$params.carrier_delay_up}000 {/if} {if isset($params.carrier_delay_up)} down {$params.carrier_delay_down}
 {/if}
 {/if}
-{if isset($params.route_cache) and $params.route_cache}
- ip route-cache {$params.route_cache}
-{/if}
 {if isset($params.duplex_mode) and $params.duplex_mode}
- duplex  {$params.duplex_mode}
+ duplex {$params.duplex_mode}
 {/if}
 root
 ! 
