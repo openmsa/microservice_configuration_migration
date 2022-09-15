@@ -60,15 +60,7 @@
     </parser>
   </command>
   <command name="CREATE"/>
-  <command name="READ">
-    <output><![CDATA[#
-## IP arp summary  ##
-{foreach $arp_summary as $arp}
-total: {$arp.total}
-incomplete: {$arp.incomplete}
-{/foreach}
-]]></output>
-  </command>
+  <command name="READ"/>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>
