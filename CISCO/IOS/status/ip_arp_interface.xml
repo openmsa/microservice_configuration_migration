@@ -38,7 +38,7 @@
 !</content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset($params.object_id)} show ip arp | include {$params.object_id}{/if}]]></operation>
+    <operation><![CDATA[{if isset($params.object_id)} show ip arp | include {$params.object_id} {/if}]]></operation>
     <post_template>{if isset($params.object_id)}
   {assign_object_variable var=&quot;interface_name&quot; value=$params.object_id}
 {/if}</post_template>
@@ -59,9 +59,7 @@
     </parser>
   </command>
   <command name="CREATE"/>
-  <command name="READ">
-    <output></output>
-  </command>
+  <command name="READ"/>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>

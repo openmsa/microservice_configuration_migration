@@ -40,7 +40,7 @@
     </content>
   </example>
   <command name="IMPORT">
-    <operation><![CDATA[{if isset ($params.ip)} ping {$params.ip}{/if}]]></operation>
+    <operation><![CDATA[{if isset ($params.ip)} ping {$params.ip} {/if}]]></operation>
        <post_template>
 {if isset($object_id)}
   {assign_object_variable var=&quot;ip&quot; value=$params.object_id}
@@ -72,15 +72,7 @@
     </parser>
   </command>
   <command name="CREATE"/>
-  <command name="READ">
-    <operation><![CDATA[ping {$object_id}]]></operation>
-    <parser>
-      <section>
-        <regexp>@^\s \s*$@</regexp>
-      </section>
-      <lines/>
-    </parser>
-  </command>
+  <command name="READ"/>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>

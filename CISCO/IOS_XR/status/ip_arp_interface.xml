@@ -57,9 +57,7 @@
     </parser>
   </command>
   <command name="CREATE"/>
-  <command name="READ">
-    <output></output>
-  </command>
+  <command name="READ"/>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>

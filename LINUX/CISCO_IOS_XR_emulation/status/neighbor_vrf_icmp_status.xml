@@ -72,14 +72,7 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 5/7/10 ms
     </parser>
   </command>
   <command name="CREATE"/>
-  <command name="READ">
-    <output><![CDATA[#
-## neighbor VRF ICMP status ##
-#
-VRF:{$neighbor_vrf_icmp_status.$object_id.object_id}
-Neighbor: {$neighbor_vrf_icmp_status.$object_id.neighbor}
-Status:  {$neighbor_vrf_icmp_status.$object_id.neighbor_vrf_icmp_status}]]></output>
-  </command>
+  <command name="READ"/>
   <command name="UPDATE"/>
   <command name="CONSTRAINT"/>
   <command name="DELETE"/>
