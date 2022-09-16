@@ -146,6 +146,72 @@ int Gig0/0/0:
         <ignore>
           <regexp>@fiber @</regexp>
         </ignore>
+        <ignore>
+          <regexp>@int @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ID: @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Xcvr Type: @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Connector: @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Encoding: @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Bit Rate: @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@supported length@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@limit: @</regexp>
+        </ignore> 
+        <ignore>
+          <regexp>@Date code @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Vendor @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ implemented:@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ Signal@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@ Monitoring@</regexp>
+        </ignore>     
+        <ignore>
+          <regexp>@ Flags@</regexp>
+        </ignore>     
+        <ignore>
+          <regexp>@ Calibrated@</regexp>
+        </ignore>     
+        <ignore>
+          <regexp>@Idprom contents@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@0x\d+: @</regexp>
+        </ignore> 
+        <ignore>
+          <regexp>@State: @</regexp>
+        </ignore>         
+        <ignore>
+          <regexp>@Environmental  @</regexp>
+        </ignore>     
+        <ignore>
+          <regexp>@Temperature: @</regexp>
+        </ignore>  
+        <ignore>
+          <regexp>@Supply voltage: @</regexp>
+        </ignore>  
+        <ignore>
+          <regexp>@Tx bias @</regexp>
+        </ignore> 
       </lines>
     </parser>
   </command>
