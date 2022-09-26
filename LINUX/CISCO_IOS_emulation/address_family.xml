@@ -162,18 +162,15 @@
     <variable displayName="_order" name="params._order" startIncrement="0" type="String" mandatoryArray="false" visible="false" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="35" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
-    <content>!
- address-family ipv4
+    <content> address-family ipv4
   bgp dampening
-  network 10.10.10.10
-  redistribute connected route-map connected_to_IBGP
-  redistribute static route-map static_to_IBGP
-  neighbor TO_RR_AI send-community both
-  neighbor TO_RR_AI next-hop-self
-  neighbor HL3_IPV4_VPNV4 send-community both
-  neighbor HL3_IPV4_VPNV4 next-hop-self
- exit-address-family
- !</content>
+  redistribute connected
+  neighbor 189.20.170.10 remote-as 65003
+  neighbor 189.20.170.10 activate
+  neighbor 189.20.170.10 as-override
+  neighbor 189.20.170.10 route-map IscDefaultPassAll in
+  neighbor 189.20.170.10 route-map IscDefaultPassAll out
+!</content>
   </example>
   <command name="IMPORT">
     <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>

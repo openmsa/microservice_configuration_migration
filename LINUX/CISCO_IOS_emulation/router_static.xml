@@ -283,6 +283,24 @@
 					{assign_object_variable var=&quot;vrf_routes.{$_vrf_route@index}.routes.{$_route@index}.gateway&quot; 
 						value=&quot;{$_route.gateway}&quot;}
 				{/if}
+				{if $_route.interface == &quot;&quot;}
+				    {if isset($_route.gateway) }
+				        {assign var=&apos;ipv4_values&apos; value=&apos;.&apos;|explode:$_route.gateway}
+					    {math assign=&quot;previous_ip&quot; equation=&quot;x - y&quot; x=$ipv4_values[3] y=1}
+					    {math assign=&quot;next_ip&quot; equation=&quot;x + y&quot; x=$ipv4_values[3] y=1}
+                        {capture assign=&quot;previous_ipv4_add&quot;}{$ipv4_values[0]}.{$ipv4_values[1]}.{$ipv4_values[2]}.{$previous_ip}{/capture}
+                        {capture assign=&quot;next_ipv4_add&quot;}{$ipv4_values[0]}.{$ipv4_values[1]}.{$ipv4_values[2]}.{$next_ip}{/capture}
+                        {if isset($interface)}
+	                        {foreach $interface as $iface}
+	                            {if $iface.addresses.0.ipv4_address == $previous_ipv4_add || $iface.addresses.0.ipv4_address == $next_ipv4_add }
+						            {assign_object_variable var=&quot;vrf_routes.{$_vrf_route@index}.routes.{$_route@index}.interface&quot; 
+						               value=&quot;{$iface.object_id}&quot;}
+						        {/if}        
+	                        {/foreach}
+	                    {/if}    
+			    
+				    {/if}
+				{/if}				
 				{if isset($_route.metric)}
 					{assign_object_variable var=&quot;vrf_routes.{$_vrf_route@index}.routes.{$_route@index}.metric&quot; 
 						value=&quot;{$_route.metric}&quot;}
@@ -340,11 +358,30 @@
 					{assign_object_variable 
 						var=&quot;routes.{$route_idx}.interface&quot; 
 						value=&quot;{$route.interface}&quot;}
-				{/if}
+                {/if}
 				{if isset($route.gateway)}
 					{assign_object_variable 
 						var=&quot;routes.{$route_idx}.gateway&quot; 
 						value=&quot;{$route.gateway}&quot;}
+				{/if}
+				{if $route.interface == &quot;&quot;}
+				    {if isset($route.gateway) }
+				        {assign var=&apos;ipv4_values&apos; value=&apos;.&apos;|explode:$route.gateway}
+					    {math assign=&quot;previous_ip&quot; equation=&quot;x - y&quot; x=$ipv4_values[3] y=1}
+					    {math assign=&quot;next_ip&quot; equation=&quot;x + y&quot; x=$ipv4_values[3] y=1}
+                        {capture assign=&quot;previous_ipv4_add&quot;}{$ipv4_values[0]}.{$ipv4_values[1]}.{$ipv4_values[2]}.{$previous_ip}{/capture}
+                        {capture assign=&quot;next_ipv4_add&quot;}{$ipv4_values[0]}.{$ipv4_values[1]}.{$ipv4_values[2]}.{$next_ip}{/capture}
+                        {if isset($interface)}
+	                        {foreach $interface as $iface}
+	                            {if $iface.addresses.0.ipv4_address == $previous_ipv4_add || $iface.addresses.0.ipv4_address == $next_ipv4_add }
+					                {assign_object_variable 
+						               var=&quot;routes.{$route_idx}.interface&quot; 
+						               value=&quot;{$iface.object_id}&quot;}
+						        {/if}        
+	                        {/foreach}
+	                    {/if}    
+			    
+				    {/if}
 				{/if}
 				{if isset($route.metric)}
 					{assign_object_variable 
