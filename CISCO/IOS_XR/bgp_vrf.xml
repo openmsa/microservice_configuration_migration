@@ -335,7 +335,6 @@ router bgp {$params.router_bgp}
  !
 {if isset($params.neighbor)}
 {foreach $params.neighbor as $neighbor}
-
 {if isset($neighbor.bgp_vrf_neighbor_remote_as)} neighbor {$neighbor.bgp_vrf_neighbor} remote-as  {$neighbor.bgp_vrf_neighbor_remote_as}
 {/if}
 {if isset($neighbor.bgp_vrf_neighbor_password)} neighbor {$neighbor.bgp_vrf_neighbor} password encrypted {$neighbor.bgp_vrf_neighbor_password}
