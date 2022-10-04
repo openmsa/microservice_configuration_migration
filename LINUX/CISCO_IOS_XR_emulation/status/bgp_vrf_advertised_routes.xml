@@ -28,21 +28,55 @@
     <variable displayName="_order" name="params._order" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="|" groupDisplayName="" maxLength="100" displayOrder="4" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="object_id" name="params.object_id" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="neighbor" name="params.neighbor" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
-    <variable displayName="bgp_vrf_advertised_routes_distinguisher" name="params.bgp_vrf_advertised_routes_distinguisher" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
+    <variable displayName="bgp_vrf_advertised_routes" name="params.network.0.bgp_vrf_advertised_routes" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
     <variable displayName="bgp_vrf_advertised_routes_total" name="params.bgp_vrf_advertised_routes_total" startIncrement="0" type="String" mandatoryArray="false" visible="true" description="" groupSeparator="" groupDisplayName="" maxLength="100" displayOrder="0" increment="0" refServiceURI="" keepOnImport="false" editable="false" onlyDetailView="false" localVarNameMatch="" remoteVarNameMatch="" arrayCanAdd="true" arrayCanRemove="true" arrayCanMove="true" arrayCanEdit="true" displayNameHeader="" fullDisplayName="" isCompositeKey="false" isMandatory="false" isUserLocked="false" isGrouped="false" isSearchable="false" isUniqueGlobal="false"/>
   </variables>
   <example>
     <content>
-RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#show bgp vrf USP neighbors 189.20.170.10 advertised-routes 			
-Tue Feb 22 14:21:46.864 BRSPO			
-Network	Next Hop	From	AS Path
-Route Distinguisher	: 27699:354188	(default for vrf	USP)
-0.0.0.0/0	189.20.170.9	200.205.253.42	65001i
-10.2.53.0/24	189.20.170.9	200.205.253.42	65001i
-10.109.229.128/27	189.20.170.9	200.205.253.42	?
-10.110.23.48/29	189.20.170.9	200.205.253.42	?
-10.110.72.208/29	189.20.170.9	200.205.253.42	?
-Processed 2831 prefixes, 2831 paths			    
+RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#show bgp vrf USP neighbors 189.20.170.10 advertised-routes 
+Tue Feb 22 14:34:20.254 BRSPO
+Network            Next Hop        From            AS Path
+Route Distinguisher: 27699:354188 (default for vrf USP)
+0.0.0.0/0          189.20.170.9    200.205.253.42  65001i
+10.2.53.0/24       189.20.170.9    200.205.253.42  65001i
+10.2.255.2/32      189.20.170.9    200.205.253.42  ?
+10.2.255.4/32      189.20.170.9    200.205.253.42  ?
+10.2.255.5/32      189.20.170.9    200.205.253.42  ?
+10.2.255.6/32      189.20.170.9    200.205.253.42  ?
+10.2.255.7/32      189.20.170.9    200.205.253.42  ?
+10.2.255.8/32      189.20.170.9    200.205.253.42  ?
+10.2.255.9/32      189.20.170.9    200.205.253.42  ?
+10.2.255.16/30     189.20.170.9    200.205.253.42  ?
+10.6.225.24/30     189.20.170.9    200.205.253.42  ?
+10.21.58.192/26    189.20.170.9    200.205.253.42  ?
+201.61.208.108/30  189.20.170.9    200.205.253.43  ?
+201.61.208.212/30  189.20.170.9    200.205.253.42  ?
+201.61.210.156/30  189.20.170.9    200.205.253.42  ?
+201.61.214.172/30  189.20.170.9    200.205.253.42  ?
+201.61.216.36/30   189.20.170.9    200.205.253.42  ?
+201.61.217.120/30  189.20.170.9    200.205.253.42  ?
+201.61.220.24/30   189.20.170.9    200.205.253.42  ?
+201.61.220.68/30   189.20.170.9    200.205.253.42  ?
+201.61.221.68/30   189.20.170.9    200.205.253.42  ?
+201.61.224.164/30  189.20.170.9    200.205.253.42  ?
+201.61.231.52/30   189.20.170.9    200.205.253.42  ?
+201.61.237.144/30  189.20.170.9    200.205.253.42  ?
+201.61.237.172/30  189.20.170.9    200.205.253.42  ?
+201.61.245.100/30  189.20.170.9    200.205.253.42  ?
+201.61.245.172/30  189.20.170.9    200.205.253.42  ?
+201.61.245.200/30  189.20.170.9    200.205.253.42  ?
+201.61.249.12/30   189.20.170.9    200.205.253.42  ?
+201.61.250.60/30   189.20.170.9    200.205.253.42  ?
+201.61.251.240/30  189.20.170.9    200.205.253.42  ?
+201.61.252.80/30   189.20.170.9    200.205.253.42  ?
+201.61.255.32/30   189.20.170.9    200.205.253.42  ?
+201.63.248.72/30   189.20.170.9    200.205.253.42  ?
+201.91.157.87/32   189.20.170.9    200.205.253.42  65100i
+201.91.157.88/32   189.20.170.9    200.205.253.42  65100i
+201.93.48.224/27   189.20.170.9    200.205.253.42  65100i
+
+Processed 2828 prefixes, 2828 paths
+RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
  </content>
   </example>
   <command name="IMPORT">
@@ -51,12 +85,16 @@ Processed 2831 prefixes, 2831 paths
     </post_template>
     <parser>
       <section>
-        <regexp>@\s*show bgp vrf (?&lt;object_id&gt;\S*) neighbors\s+(?&lt;neighbor&gt;.*)\s+advertised-routes@</regexp>
+        <regexp>@\s*show bgp vrf (?&lt;object_id&gt;\S*) neighbors\s+(?&lt;neighbor&gt;.*)\s+adv@</regexp>
       </section>
       <lines>
-        <line>
-          <array/>
-          <regexp>@^\s*.*(?&lt;bgp_vrf_advertised_routes_distinguisher&gt;\S*)@</regexp>
+         <line>
+          <array name="network">
+            <lines>
+            </lines>
+            <regexp>@^\s*(?&lt;bgp_vrf_advertised_routes&gt;(([0-9]{1,3}\.){3}[0-9]{1,3})|(([A-Fa-f0-9:]*:+)+[A-Fa-f0-9]*))@</regexp>
+            <regexp>@^(?&lt;bgp_vrf_advertised_routes&gt;([0-9]{1,3}\.){3}[0-9]{1,3}\/\d+ )@</regexp>
+          </array>         
           <xpath/>
         </line>
         <line>
@@ -68,16 +106,19 @@ Processed 2831 prefixes, 2831 paths
           <regexp>@BGP table@</regexp>
         </ignore>
         <ignore>
-          <regexp>@Network Next@</regexp>
+          <regexp>@Network @</regexp>
         </ignore>
         <ignore>
           <regexp>@codes@</regexp>
         </ignore>
         <ignore>
-          <regexp>@Route@</regexp>
+          <regexp>@Route @</regexp>
         </ignore>
         <ignore>
-          <regexp>@^\s+$@</regexp>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
         </ignore>
       </lines>
     </parser>

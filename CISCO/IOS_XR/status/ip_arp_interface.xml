@@ -53,6 +53,12 @@
           </array>         
           <xpath/>
         </line>
+        <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
+        </ignore>
       </lines> 
     </parser>
   </command>

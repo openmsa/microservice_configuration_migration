@@ -184,6 +184,9 @@ Sent: 1523453 (retransmit: 1304 fastretransmit: 0),with data: 773766, total data
           <regexp>@^\s*$@</regexp>
         </ignore>
         <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
+        </ignore>
+        <ignore>
           <regexp>@^\s*!@</regexp>
         </ignore>
         <ignore>
