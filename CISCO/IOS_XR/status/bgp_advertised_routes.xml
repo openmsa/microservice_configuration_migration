@@ -93,6 +93,9 @@ Total number of prefixes 2
           <regexp>@^\s*$@</regexp>
         </ignore>
         <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
+        </ignore>
+        <ignore>
           <regexp>@Network@</regexp>
         </ignore>
         <ignore>

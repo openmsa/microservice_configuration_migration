@@ -35,22 +35,22 @@
   </variables>
   <example>
     <content>
-    RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#show bgp vrf USP neighbors 189.20.170.10                   
-Tue Feb 22 13:28:47.304 BRSPO
+RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#show bgp vrf USP neighbors 189.20.170.10          
+Tue Feb 22 14:34:36.227 BRSPO
 
 BGP neighbor is 189.20.170.10, vrf USP
  Remote AS 65001, local AS 10429, external link
  Remote router ID 201.60.23.6
   BGP state = Established, up for 16w6d
   NSR State: NSR Ready
-  Last read 00:00:59, Last read before reset 16w6d
+  Last read 00:00:06, Last read before reset 16w6d
   Hold time is 180, keepalive interval is 60 seconds
   Configured hold time: 180, keepalive: 60, min acceptable hold time: 3
-  Last write 00:00:18, attempted 19, written 19
-  Second last write 00:01:18, attempted 19, written 19
+  Last write 00:00:33, attempted 52, written 52
+  Second last write 00:00:48, attempted 53, written 53
   Last write before reset 16w6d, attempted 33, written 33
   Second last write before reset 16w6d, attempted 96, written 96
-  Last write pulse rcvd  Feb 22 13:28:28.748 last full not set pulse count 3379021
+  Last write pulse rcvd  Feb 22 14:34:30.321 last full not set pulse count 3379178
   Last write pulse rcvd before reset 16w6d
   Socket not armed for io, armed for read, armed for write
   Last write thread event before reset 16w6d, second last 16w6d
@@ -68,12 +68,12 @@ BGP neighbor is 189.20.170.10, vrf USP
     Route refresh: advertised (old + new) and received (new)
     4-byte AS: advertised and received
     Address family IPv4 Unicast: advertised and received
-  Received 986526 messages, 4 notifications, 0 in queue
-  Sent 2565332 messages, 6 notifications, 0 in queue
+  Received 986584 messages, 4 notifications, 0 in queue
+  Sent 2565438 messages, 6 notifications, 0 in queue
   Minimum time between advertisement runs is 0 secs
 
  For Address Family: IPv4 Unicast
-  BGP neighbor version 612951648
+  BGP neighbor version 612978362
   Update group: 0.3 Filter-group: 0.1  No Refresh request being processed
   AF-dependent capabilities:
     Graceful Restart capability advertised
@@ -84,13 +84,13 @@ BGP neighbor is 189.20.170.10, vrf USP
   Policy for outgoing advertisements is IscDefaultPassAll
   4 accepted prefixes, 2 are bestpaths
   Cumulative no. of prefixes denied: 0. 
-  Prefix advertised 119802, suppressed 378, withdrawn 86980
+  Prefix advertised 119885, suppressed 378, withdrawn 86997
   Maximum prefixes allowed 1048576
   Threshold for warning message 75%, restart interval 0 min
   AS override is set
   An EoR was received during read-only mode
-  Last ack version 612951648, Last synced ack version 612951617
-  Outstanding version objects: current 0, max 25
+  Last ack version 612978058, Last synced ack version 612978058
+  Outstanding version objects: current 2, max 25
   Additional-paths operation: None
 
   Connections established 34; dropped 33
@@ -98,7 +98,7 @@ BGP neighbor is 189.20.170.10, vrf USP
   Foreign host: 189.20.170.10, Foreign port: 4956
   Last reset 16w6d, due to Peer closing down the session
   Peer reset reason: Remote closed the session (Connection timed out)
-  Time since last notification sent to neighbor: 19w5d
+  Time since last notification sent to neighbor: 19w6d
   Error Code: hold time expired
   Notification data sent:
     None
@@ -124,7 +124,7 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
         </line>
         <line>
           <array/>
-          <regexp>@\s+BGP state =(?&lt;bgp_state&gt;.*)@</regexp>
+          <regexp>@\s*BGP state =(?&lt;bgp_state&gt;.*)@</regexp>
           <xpath/>
         </line>
         <line>
@@ -142,8 +142,11 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
           <regexp>@\s*Maximum prefixes allowed\s+(?&lt;bgp_vrf_max_prefix_allow&gt;\d+)@</regexp>
           <xpath/>
         </line>
-        <ignore>
+       <ignore>
           <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
         </ignore>
         <ignore>
           <regexp>@^\s*!@</regexp>
@@ -154,6 +157,9 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
         <ignore>
           <regexp>@BGP version@</regexp>
         </ignore>
+        <ignore>
+          <regexp>@Remote @</regexp>
+        </ignore>        
         <ignore>
           <regexp>@Neighbor sessions@</regexp>
         </ignore>
@@ -196,6 +202,87 @@ RP/0/8/CPU0:c-br-sp-spo-mb-rav-01#
         <ignore>
           <regexp>@Prefix activity@</regexp>
         </ignore>
+        <ignore>
+          <regexp>@NSR State@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Last @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Hld time@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@old time@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Second last@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Socket @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Precedence:@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Non-stop@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Restart@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@restart @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Enforcing @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@received@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Received@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@capabilities@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Stale @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Multi-protocol@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Neighbor @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Route refresh@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@advertised and received@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Sent @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@advertisement @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@neighbor version@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Update group@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Address Family@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Maximum @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@advertisements @</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@Cumulative @</regexp>
+        </ignore>       
       </lines>
     </parser>
   </command>

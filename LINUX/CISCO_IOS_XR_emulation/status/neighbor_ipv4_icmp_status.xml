@@ -68,6 +68,12 @@ Success rate is 100 percent (5/5), round-trip min/avg/max = 3/5/8 ms
         <ignore>
           <regexp>@!!!!!@</regexp>
         </ignore>
+        <ignore>
+          <regexp>@^\s*$@</regexp>
+        </ignore>
+        <ignore>
+          <regexp>@\d\d:\d\d:\d\d\.\d+@</regexp>
+        </ignore>
       </lines>
     </parser>
   </command>
