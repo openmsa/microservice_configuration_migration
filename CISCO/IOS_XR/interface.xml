@@ -263,6 +263,11 @@
   </command>
   <command name="CREATE">
     <operation><![CDATA[!
+{assign var=iface value="."|explode:$params.object_id}
+interface {$iface[0]}
+no shutdown
+no loopback internal
+!
 interface {$params.object_id}
 {if isset($params.int_description) }
  description {$params.int_description}
