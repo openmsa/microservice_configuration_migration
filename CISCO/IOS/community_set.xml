@@ -73,10 +73,13 @@
 			{/foreach}
 		{/if}
         {if isset($ficl.ios_regex)}
-            {assign_object_variable
-                var=&quot;community_list.{$idx}.community&quot;
-                value=&quot;ios-regex &apos;{$ficl.ios_regex}&apos;&quot;}
-            {$idx=$idx+1}
+            {assign var=&quot;ios_regex_list&quot; value=&quot; &quot;|explode:$ficl.ios_regex}
+            {foreach $ios_regex_list as $irl}
+                {assign_object_variable
+                    var=&quot;community_list.{$idx}.community&quot;
+                    value=&quot;ios-regex &apos;{$irl}&apos;&quot;}
+                {$idx=$idx+1}
+            {/foreach}
         {/if}
     {/foreach}
 {/if}</post_template>
