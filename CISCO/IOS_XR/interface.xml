@@ -274,6 +274,13 @@ interface {$params.object_id}
 {/if}
 {if isset($params.vrf_name)}
  vrf {$params.vrf_name}
+{else}
+{if isset($params.addresses) }
+ ipv4 access-group iACL-SECURITY-IN-IPv4
+{/if}
+{if isset($params.ipv6_address) }
+ ipv6 access-group iACL-SECURITY-IN-IPv6
+{/if}
 {/if}
 {if isset($params.addresses)}
 {foreach $params.addresses as $addr}
