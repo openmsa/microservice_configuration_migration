@@ -128,6 +128,7 @@ access-list 35 permit 239.232.0.0 0.0.255.255
     <operation><![CDATA[cat /config/cisco_ios/test.conf]]></operation>
     <post_template>{$seq_number=10}
 {$mask_length=&quot;&quot;}
+{assign_object_variable var=&quot;test_var&quot; value={$params.object_id}}
 {if isset($params.access_list)}
 	{foreach $params.access_list as $acl}
 	    {if isset($acl.acl_src_imask)}
